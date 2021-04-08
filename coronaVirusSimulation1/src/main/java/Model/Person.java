@@ -14,6 +14,8 @@ public class Person {
    public int y;
    public boolean immune = false;
    public boolean vaccinated = false;
+   public boolean tested = false;
+   public boolean testResult = false;
    public boolean died = false;
    public int infected = 0; // when infected, this will be positive and increase until the
                             // infectedDuration is reached, at which point the person
@@ -45,6 +47,9 @@ public class Person {
         if(infected > infected_duration/2 && infected < infected_duration){
             vaccinate();
         }
+        if(!tested) {
+        	testing();
+        }
         // check to see if they've reached the immunity threshold
         if(infected > infected_duration) {
             //infected = 0;
@@ -58,7 +63,17 @@ public class Person {
         if(random_number == 1){
             vaccinated = true;
         }
-    }    
+    }
+    
+    // CDC estimates that about 40% of carriers are asymptomatic
+    // Based on this number, 2 in 5 people that are infected will get tested
+    // Assumption: once tested positive, person will take quarantine measures
+    public void testing() {
+    	int random_number = random.nextInt(100);
+    	if (infected > 0 && random_number <= 2) {
+    		testResult = true;
+    		}
+    }
    
    public void move() {
       x += vel_x;
