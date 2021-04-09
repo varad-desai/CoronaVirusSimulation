@@ -18,7 +18,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
     // Timer is needed for animation
    private Timer tm = new Timer(100, this);
    // the number of people in the simulation
-   private int numPoints = 200;
+   private int numPoints = 1000;
    // an array of Person objects
    private Person[] p = new Person[numPoints];
    // how large to draw each Person
@@ -51,7 +51,9 @@ public class AnimationPanel extends JPanel implements ActionListener {
       // at each step in the animation, move all the Person objects
 //      System.out.println(p.length);
       for(int i=0;i<p.length;i++) {
-         p[i].move();
+     	 if (!p[i].died) {
+    		 p[i].move();
+    	 }
          p[i].checkForImmunity();
       }
       // check to see if any of the people are close enough to infect someone
@@ -62,6 +64,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
               " Infected: "+calculate_no_of_infected()+
               " Immune: "+calculate_no_of_immune()+
               " Susceptible: "+calculate_no_of_susceptible()+
+              " Deaths: "+calculate_no_of_deaths()+
               " Population: "+p.length
               );
       repaint();
@@ -96,7 +99,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
        for(int i=0; i<p.length; i++){
            if(p[i].immune) no_of_immune++;
        }
-       return no_of_immune;
+       int deaths = calculate_no_of_deaths();
+       return no_of_immune - deaths;
    }
    
    public int calculate_no_of_susceptible(){
@@ -105,6 +109,14 @@ public class AnimationPanel extends JPanel implements ActionListener {
            if(p[i].infected == 0) no_of_susceptible++;
        }
        return no_of_susceptible;
+   }
+   
+   public int calculate_no_of_deaths() {
+       int no_of_deaths = 0;
+       for(int i=0; i<p.length; i++){
+           if(p[i].died) no_of_deaths++;
+       }
+       return no_of_deaths;
    }
    
    public void handleCollisions() {
@@ -117,11 +129,11 @@ public class AnimationPanel extends JPanel implements ActionListener {
             // if the distance between 2 points is small enough, and one of
             // the Persons is infected, then infect the other Person
             if (dist < infectDistance) {
-               if (p[i].infected > 0 && !p[i].immune && !p[j].immune && p[j].infected == 0) {
+               if (p[i].infected > 0 && !p[i].immune && !p[j].immune && !p[i].died && p[j].infected == 0) {
                   p[j].infected++;
                   p[i].no_of_person_infected++;
                }
-               if (p[j].infected > 0 && !p[j].immune && !p[i].immune && p[i].infected == 0) {
+               if (p[j].infected > 0 && !p[j].immune && !p[i].immune && !p[j].died && p[i].infected == 0) {
                   p[i].infected++;
                   p[j].no_of_person_infected++;
                }
@@ -137,10 +149,12 @@ public class AnimationPanel extends JPanel implements ActionListener {
       for(int i=0;i<p.length;i++) {
          if (p[i].infected > 0 && !p[i].immune) {
             g.setColor(Color.red);
+         } else if (p[i].died) {
+        	 g.setColor(Color.black);
          } else if (p[i].immune) {
             g.setColor(Color.green);
          } else {
-            g.setColor(Color.black);
+            g.setColor(Color.blue);
          }
          g.fillOval(p[i].x, p[i].y, circleSize, circleSize);
       }

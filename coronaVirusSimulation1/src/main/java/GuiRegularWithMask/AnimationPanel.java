@@ -51,7 +51,9 @@ public class AnimationPanel extends JPanel implements ActionListener {
         // at each step in the animation, move all the Person objects
         //System.out.println(p.length);
         for(int i=0;i<p.length;i++) {
-            p[i].move();
+       	 	if (!p[i].died) {
+       	 		p[i].move();
+       	 	}
             p[i].checkForImmunity();
         }
         
@@ -68,6 +70,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
             " Infected: "+no_of_infected+
             " Immune: "+calculate_no_of_immune()+
             " Susceptible: "+calculate_no_of_susceptible()+
+            " Deaths: "+calculate_no_of_deaths()+
             " Population: "+p.length
             );
         repaint();
@@ -102,7 +105,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
         for(int i=0; i<p.length; i++){
             if(p[i].immune) no_of_immune++;
         }
-        return no_of_immune;
+        int deaths = calculate_no_of_deaths();
+        return no_of_immune - deaths;
     }
    
     public int calculate_no_of_susceptible(){
@@ -113,6 +117,13 @@ public class AnimationPanel extends JPanel implements ActionListener {
         return no_of_susceptible;
     }
    
+    public int calculate_no_of_deaths() {
+        int no_of_deaths = 0;
+        for(int i=0; i<p.length; i++){
+            if(p[i].died) no_of_deaths++;
+        }
+        return no_of_deaths;
+    }
    
     public void handleCollisions(boolean mask_wearing_begins) {
         // compare all points with each other
@@ -135,13 +146,13 @@ public class AnimationPanel extends JPanel implements ActionListener {
                     // showcasing wearing of masks by both the person
                     // actual probability according to WHO is 3%
                     //https://www.livescience.com/face-masks-eye-protection-covid-19-prevention.html
-                    if (p[i].infected > 0 && !p[i].immune && !p[j].immune && p[j].infected == 0) {
+                    if (p[i].infected > 0 && !p[i].immune && !p[j].immune && !p[i].died && p[j].infected == 0) {
                         if(allowed_to_get_infected){
                             p[j].infected++;
                             p[i].no_of_person_infected++;
                         }
                     }
-                    if (p[j].infected > 0 && !p[j].immune && !p[i].immune && p[i].infected == 0) {
+                    if (p[j].infected > 0 && !p[j].immune && !p[i].immune && !p[j].died && p[i].infected == 0) {
                         if(allowed_to_get_infected){
                         p[i].infected++;
                         p[j].no_of_person_infected++;
@@ -159,10 +170,12 @@ public class AnimationPanel extends JPanel implements ActionListener {
         for(int i=0;i<p.length;i++) {
             if (p[i].infected > 0 && !p[i].immune) {
                 g.setColor(Color.red);
+            } else if (p[i].died) {
+           	 g.setColor(Color.black);
             } else if (p[i].immune) {
                 g.setColor(Color.green);
             } else {
-                g.setColor(Color.black);
+                g.setColor(Color.blue);
             }
             g.fillOval(p[i].x, p[i].y, circle_size, circle_size);
         }
