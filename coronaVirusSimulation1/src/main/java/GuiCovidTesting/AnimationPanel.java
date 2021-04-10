@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package GuiRegular;
+package GuiCovidTesting;
 import Model.Person;
 import java.awt.*;
 import java.awt.event.*;
@@ -50,12 +45,13 @@ public class AnimationPanel extends JPanel implements ActionListener {
    public void actionPerformed(ActionEvent e) {
       // at each step in the animation, move all the Person objects
 //      System.out.println(p.length);
-      for(int i=0;i<p.length;i++) {
-     	 if (!p[i].died) {
-    		 p[i].move();
-    	 }
-         p[i].checkForImmunity();
-      }
+       for(int i=0;i<p.length;i++) {
+       	p[i].testing();
+       	if (!p[i].testResult && !p[i].died) {	
+           p[i].move();
+       	}
+           p[i].checkForImmunity();
+       }
       // check to see if any of the people are close enough to infect someone
       handleCollisions();
       
@@ -126,16 +122,26 @@ public class AnimationPanel extends JPanel implements ActionListener {
             int deltax = p[i].x - p[j].x;
             int deltay = p[i].y - p[j].y;
             double dist = Math.sqrt(deltax*deltax+deltay*deltay);
+            // Implements statistic that 40% of cases are asymptomatic
+            // People who tested positive are assumed to quarantine for 2 weeks
+            // This slows down the spread
+            boolean allowed_to_get_infected;
+            int random_number = gen.nextInt(100);
+            allowed_to_get_infected = random_number >= 1 && random_number <= 8;
             // if the distance between 2 points is small enough, and one of
             // the Persons is infected, then infect the other Person
             if (dist < infectDistance) {
                if (p[i].infected > 0 && !p[i].immune && !p[j].immune && !p[i].died && p[j].infected == 0) {
-                  p[j].infected++;
-                  p[i].no_of_person_infected++;
+            	   if(allowed_to_get_infected){
+                       p[j].infected++;
+                       p[i].no_of_person_infected++;
+                   }
                }
                if (p[j].infected > 0 && !p[j].immune && !p[i].immune && !p[j].died && p[i].infected == 0) {
-                  p[i].infected++;
-                  p[j].no_of_person_infected++;
+                   if(allowed_to_get_infected){
+                	   p[i].infected++;
+                	   p[j].no_of_person_infected++;
+                   }
                }
                
             }
@@ -148,10 +154,17 @@ public class AnimationPanel extends JPanel implements ActionListener {
       super.paintComponent(g);
       for(int i=0;i<p.length;i++) {
          if (p[i].infected > 0 && !p[i].immune) {
-            g.setColor(Color.red);
-         } else if (p[i].died) {
-        	 g.setColor(Color.black);
-         } else if (p[i].immune) {
+        	 if(p[i].testResult) {
+        	 g.setColor(Color.pink);
+        	 }
+        	 else {
+        		 g.setColor(Color.red);
+        	 }
+         }
+         	else if (p[i].died) {
+        	g.setColor(Color.black);
+         }
+         	else if (p[i].immune) {
             g.setColor(Color.green);
          } else {
             g.setColor(Color.blue);

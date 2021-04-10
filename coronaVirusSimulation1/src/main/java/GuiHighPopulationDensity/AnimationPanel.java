@@ -52,7 +52,9 @@ public class AnimationPanel extends JPanel implements ActionListener {
       // at each step in the animation, move all the Person objects
       System.out.println(p.length);
       for(int i=0;i<p.length;i++) {
-         p[i].move();
+    	 if (!p[i].died) {
+    		 p[i].move();
+    	 }
          p[i].checkForImmunity();
       }
       // check to see if any of the people are close enough to infect someone
@@ -113,7 +115,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
          } else if (p[i].immune) {
             g.setColor(Color.green);
          } else {
-            g.setColor(Color.black);
+            g.setColor(Color.blue);
          }
          g.fillOval(p[i].x, p[i].y, circleSize, circleSize);
       }
