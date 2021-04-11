@@ -11,6 +11,8 @@ import java.awt.*;
 /**
  *
  * @author varad
+ * 
+ * 1. 80% population is under lockdown 20% population can move 
  */
 public class GUI {
      public static void main(String[] args) {

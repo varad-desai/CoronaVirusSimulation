@@ -45,7 +45,7 @@ public class Person {
             // Comment this below line to stop vaccination.
         }
         if(infected > infected_duration/2 && infected < infected_duration){
-            vaccinate();
+            vaccinate_after_infection();
         }
         if(!tested) {
         	testing();
@@ -68,7 +68,7 @@ public class Person {
     	}
     }
     
-    public void vaccinate(){
+    public void vaccinate_after_infection(){
         int random_number = random.nextInt(4);
         if(random_number == 1){
             vaccinated = true;

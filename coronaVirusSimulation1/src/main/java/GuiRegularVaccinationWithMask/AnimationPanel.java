@@ -20,6 +20,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
     private Timer tm = new Timer(100, this); // timer for animation
     private int population = 1000;
     private int threshold_for_mask = (population*10)/100;
+    private int threshold_for_vaccination = (population*10)/100;
     private boolean mask_wearing_begins = false;
     private Person[] p = new Person[population]; // array of person 
     private int circle_size = 10;
@@ -28,6 +29,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
     private int width = 800; // screen width
    
     private Random random = new Random();
+    private int steps = 0;
     
     
 
@@ -60,9 +62,12 @@ public class AnimationPanel extends JPanel implements ActionListener {
         
         int no_of_infected = calculate_no_of_infected();
         // check to see if any of the people are close enough to infect someone
-      
+        steps++;
         if(no_of_infected > threshold_for_mask){
             mask_wearing_begins = true;
+            if(steps%10 == 0){
+                vaccinate_after_threshold();
+            }
         }
         handleCollisions(mask_wearing_begins);
       
@@ -125,6 +130,18 @@ public class AnimationPanel extends JPanel implements ActionListener {
         }
         return no_of_deaths;
     }
+    
+    public void vaccinate_after_threshold(){
+        // randomy vaccinate 10 people
+        int count = 0;
+        while(count!=10){
+            int random_person = random.nextInt(population);
+            if(p[random_person].vaccinated == false){
+                p[random_person].vaccinated = true;
+                count++;
+            }
+        }
+    }
    
     public void handleCollisions(boolean mask_wearing_begins) {
         // compare all points with each other
@@ -137,7 +154,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
                 int random_number = random.nextInt(100);
                 if(mask_wearing_begins){
                     allowed_to_get_infected = 
-                            random_number >= 1 && random_number <= 90;
+                            random_number >= 1 && random_number <= 3;
                 }
                 // if distance between 2 person is smaller than infect_distance
                 // and 1 of the 2 person is infected and the other one is not immune
@@ -194,7 +211,5 @@ public class AnimationPanel extends JPanel implements ActionListener {
             }
             g.fillOval(p[i].x, p[i].y, circle_size, circle_size);
         }
-    }
-   
-   
+    }  
 }

@@ -35,7 +35,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
    
    
 //    System.out.println(p.length);
-    int moveablePopulation =(POPULATION * 50)/100;
+    int moveablePopulation =(POPULATION * 30)/100;
 //    System.out.println(moveablePopulation);
 
    
