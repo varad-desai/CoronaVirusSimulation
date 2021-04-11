@@ -9,9 +9,11 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *
+ *  
  * @author varad
- */
+ * 1. Effectiveness of implementing wearing of mask 
+ * after 10% population gets infected
+*/
 public class GUI {
      public static void main(String[] args) {
       int height = 600;
