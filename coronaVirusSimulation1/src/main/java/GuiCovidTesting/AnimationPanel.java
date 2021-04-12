@@ -74,6 +74,9 @@ public class AnimationPanel extends JPanel implements ActionListener {
        	if (!p[i].testResult && !p[i].died) {	
            p[i].move();
        	}
+       	else if (p[i].testResult){
+       		p[i].moveWithSocialDistance();
+       	}
            p[i].checkForImmunity();
        }
       // check to see if any of the people are close enough to infect someone
@@ -151,7 +154,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
             // This slows down the spread
             boolean allowed_to_get_infected;
             int random_number = gen.nextInt(100);
-            allowed_to_get_infected = random_number >= 1 && random_number <= 8;
+            allowed_to_get_infected = random_number >= 1 && random_number <= 1.5;
             // if the distance between 2 points is small enough, and one of
             // the Persons is infected, then infect the other Person
             if (dist < infectDistance) {
