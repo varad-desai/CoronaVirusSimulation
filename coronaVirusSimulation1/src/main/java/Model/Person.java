@@ -99,4 +99,23 @@ public class Person {
          vel_y = -vel_y;
       }
    }
+
+    /**
+     * Method to simulate that when person is quarantining then moves only for 10% of the time.
+     * Rest of the population will remain healthy is rest of the population do not intersect with this population
+     * and follows the social distancing protocol to move only 50% of the time to reduce the spread.
+     */
+   public void moveWithSocialDistance() {
+       if(infected > 0){
+           // person is infected, so next person will be following at home quarantine
+           if (Math.random()<.1) {
+               move ();
+           }
+       } else {
+           if (Math.random()<.5) {
+               move ();
+           }
+       }
+
+    }
 }
