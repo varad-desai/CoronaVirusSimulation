@@ -10,6 +10,7 @@ import java.util.Random;
  * @author varad
  */
 public class Person {
+
    public int x;
    public int y;
    public boolean immune = false;
@@ -38,7 +39,23 @@ public class Person {
       vel_y = random.nextInt(10) - 5;
    }
    
-    public void checkForImmunity(){
+    public int getX() {
+    	return x;
+    }
+
+    public void setX(int x) {
+    	this.x = x;
+    }
+
+    public int getY() {
+    	return y;
+    }
+
+    public void setY(int y) {
+    	this.y = y;
+    }
+
+	public void checkForImmunity(){
         // each time they move, if already infected they get closer to immunity
         if(infected > 0) {
             infected++;
