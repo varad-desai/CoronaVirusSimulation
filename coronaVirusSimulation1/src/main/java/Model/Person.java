@@ -99,4 +99,14 @@ public class Person {
          vel_y = -vel_y;
       }
    }
+
+    /**
+     * Method to simulate that 10% of population is NOT practicing any social distancing.
+     * Rest of the population will remain healthy is rest of the population do not intersect with this population
+     */
+   public void moveWithSocialDistance() {
+        if (Math.random()<.1) {
+          move ();
+        }
+    }
 }
