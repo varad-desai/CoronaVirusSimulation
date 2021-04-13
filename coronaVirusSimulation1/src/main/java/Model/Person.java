@@ -220,4 +220,17 @@ public class Person {
        }
 
     }
+   
+   public void moveWithLockdown() {
+       if(infected > 0){
+           if (Math.random()<.1) {
+               move ();
+           }
+       } else {
+           if (Math.random()<.3) {
+               move ();
+           }
+       }
+
+    }
 }

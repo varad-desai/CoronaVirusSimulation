@@ -65,11 +65,11 @@ public class AnimationPanel extends JPanel implements ActionListener {
    public AnimationPanel(int h, int w) {
       width = w;
       height = h;
-      setPreferredSize(new Dimension(WIDTH, HEIGHT));
+      setPreferredSize(new Dimension(width, height));
       // populate the Person array with randomly placed people
       for(int i=0;i<population;i++) {
-         int x = gen.nextInt(WIDTH);
-         int y = gen.nextInt(HEIGHT);
+         int x = gen.nextInt(width);
+         int y = gen.nextInt(height);
          p[i] = new Person(x, y);
       }
       // set Patient 0- initially this is the only person infected
@@ -83,7 +83,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
       
       for(int i=0; i<moveablePopulation; i++) {
      	 if (!p[i].died) {
-    		 p[i].move();
+    		 p[i].moveWithLockdown();
     	 }
       }
       for(int i=0; i<population; i++){

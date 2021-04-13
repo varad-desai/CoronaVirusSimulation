@@ -76,7 +76,9 @@ public class AnimationPanel extends JPanel implements ActionListener {
         // at each step in the animation, move 10% the Person objects
 
         for(int i=0; i<moveablePopulation; i++) {
-            p[i].moveWithSocialDistance();
+        	 if (!p[i].died) {
+        		 p[i].moveWithSocialDistance();
+        	 }
         }
         for(int i=0; i<population; i++){
             p[i].checkForImmunity();
@@ -88,6 +90,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
                 " Infected: "+calculate_no_of_infected()+
                 " Immune: "+calculate_no_of_immune()+
                 " Susceptible: "+calculate_no_of_susceptible()+
+                " Deaths: "+calculate_no_of_deaths()+
                 " Population: "+population
         );
         repaint();
@@ -103,11 +106,11 @@ public class AnimationPanel extends JPanel implements ActionListener {
                 // if the distance between 2 points is small enough, and one of
                 // the Persons is infected, then infect the other Person
                 if (dist < infectDistance) {
-                    if (p[i].infected > 0 && !p[i].immune && !p[j].immune && p[j].infected == 0) {
+                    if (p[i].infected > 0 && !p[i].immune && !p[j].immune && !p[i].died && p[j].infected == 0) {
                         p[j].infected++;
                         p[i].no_of_person_infected++;
                     }
-                    if (p[j].infected > 0 && !p[j].immune && !p[i].immune && p[i].infected == 0) {
+                    if (p[j].infected > 0 && !p[j].immune && !p[i].immune && !p[j].died && p[i].infected == 0) {
                         p[i].infected++;
                         p[j].no_of_person_infected++;
                     }
@@ -124,10 +127,12 @@ public class AnimationPanel extends JPanel implements ActionListener {
         for(int i=0;i<population;i++) {
             if (p[i].infected > 0 && p[i].immune == false) {
                 g.setColor(Color.red);
+            } else if (p[i].died) {
+           	 g.setColor(Color.black);
             } else if (p[i].immune) {
                 g.setColor(Color.green);
             } else {
-                g.setColor(Color.black);
+                g.setColor(Color.blue);
             }
             g.fillOval(p[i].x, p[i].y, CIRCLE_SIZE, CIRCLE_SIZE);
         }
@@ -174,6 +179,14 @@ public class AnimationPanel extends JPanel implements ActionListener {
             if(p[i].infected == 0) no_of_susceptible++;
         }
         return no_of_susceptible;
+    }
+    
+    public int calculate_no_of_deaths() {
+        int no_of_deaths = 0;
+        for(int i=0; i<population; i++){
+            if(p[i].died) no_of_deaths++;
+        }
+        return no_of_deaths;
     }
 
 }
