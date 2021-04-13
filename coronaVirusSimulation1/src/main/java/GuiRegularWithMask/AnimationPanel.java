@@ -107,7 +107,9 @@ public class AnimationPanel extends JPanel implements ActionListener {
                 count_infection_spreaders++;
             }
         }
-        r_factor = (double)sum/count_infection_spreaders;
+        if (count_infection_spreaders > 0) {
+     	   r_factor = (double)sum/count_infection_spreaders;
+        }
         return r_factor;
     }
    

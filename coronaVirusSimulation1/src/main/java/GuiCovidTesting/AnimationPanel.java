@@ -103,7 +103,10 @@ public class AnimationPanel extends JPanel implements ActionListener {
                 count_infection_spreaders++;
            }
        }
-       r_factor = (double)sum/count_infection_spreaders;
+       
+       if (count_infection_spreaders > 0) {
+    	   r_factor = (double)sum/count_infection_spreaders;
+       }
        return r_factor;
    }
    
@@ -154,7 +157,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
             // This slows down the spread
             boolean allowed_to_get_infected;
             int random_number = gen.nextInt(100);
-            allowed_to_get_infected = random_number >= 1 && random_number <= 1.5;
+            allowed_to_get_infected = random_number >= 1 && random_number <= 1.25;
             // if the distance between 2 points is small enough, and one of
             // the Persons is infected, then infect the other Person
             if (dist < infectDistance) {

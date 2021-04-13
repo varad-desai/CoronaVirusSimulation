@@ -134,6 +134,14 @@ public class Person {
 	public void setInfected_duration(int infected_duration) {
 		this.infected_duration = infected_duration;
 	}
+	
+	public int getNo_of_person_infected() {
+		return no_of_person_infected;
+	}
+
+	public void setNo_of_person_infected(int no_of_person_infected) {
+		this.no_of_person_infected = no_of_person_infected;
+	}
 
 	public void checkForImmunity(){
         // each time they move, if already infected they get closer to immunity
