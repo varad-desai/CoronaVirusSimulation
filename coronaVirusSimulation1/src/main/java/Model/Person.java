@@ -10,6 +10,7 @@ import java.util.Random;
  * @author varad
  */
 public class Person {
+
    public int x;
    public int y;
    public boolean immune = false;
@@ -20,7 +21,7 @@ public class Person {
    public int infected = 0; // when infected, this will be positive and increase until the
                             // infectedDuration is reached, at which point the person
                             // will be immune
-   public int no_of_person_infected = 0; // number of other persson infected by this person over the course of infection
+   public int no_of_person_infected = 0; // number of other person infected by this person over the course of infection
    private int vel_x = 0;
    private int vel_y = 0;
    private int infected_duration = 140;  // how many steps in the animation the person
@@ -36,9 +37,113 @@ public class Person {
       // randomly set the Person's velocity- from -5 to 4 in both x and y directions
       vel_x = random.nextInt(10) - 5;
       vel_y = random.nextInt(10) - 5;
-   }
+   	}
    
-    public void checkForImmunity(){
+    public int getX() {
+    	return x;
+    }
+
+    public void setX(int x) {
+    	this.x = x;
+    }
+
+    public int getY() {
+    	return y;
+    }
+
+    public void setY(int y) {
+    	this.y = y;
+    }
+    
+	public int getVel_x() {
+		return vel_x;
+	}
+
+	public void setVel_x(int vel_x) {
+		this.vel_x = vel_x;
+	}
+
+	public int getVel_y() {
+		return vel_y;
+	}
+
+	public void setVel_y(int vel_y) {
+		this.vel_y = vel_y;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public boolean isTested() {
+		return tested;
+	}
+
+	public void setTested(boolean tested) {
+		this.tested = tested;
+	}
+
+	public int getInfected() {
+		return infected;
+	}
+
+	public void setInfected(int infected) {
+		this.infected = infected;
+	}
+
+	public boolean isVaccinated() {
+		return vaccinated;
+	}
+
+	public void setVaccinated(boolean vaccinated) {
+		this.vaccinated = vaccinated;
+	}
+
+	public boolean isDied() {
+		return died;
+	}
+
+	public void setDied(boolean died) {
+		this.died = died;
+	}
+
+	public boolean isImmune() {
+		return immune;
+	}
+
+	public void setImmune(boolean immune) {
+		this.immune = immune;
+	}
+
+	public int getInfected_duration() {
+		return infected_duration;
+	}
+
+	public void setInfected_duration(int infected_duration) {
+		this.infected_duration = infected_duration;
+	}
+	
+	public int getNo_of_person_infected() {
+		return no_of_person_infected;
+	}
+
+	public void setNo_of_person_infected(int no_of_person_infected) {
+		this.no_of_person_infected = no_of_person_infected;
+	}
+
+	public void checkForImmunity(){
         // each time they move, if already infected they get closer to immunity
         if(infected > 0) {
             infected++;
@@ -47,14 +152,11 @@ public class Person {
         if(infected > infected_duration/2 && infected < infected_duration){
             vaccinate_after_infection();
         }
-        if(!tested) {
-        	testing();
-        }
         if(infected > infected_duration/2 && infected < infected_duration){
             deathProbability();
         }
         // check to see if they've reached the immunity threshold
-        if(infected > infected_duration) {
+        if(infected > infected_duration && !died) {
             //infected = 0;
         	immune = true;
         }
@@ -113,6 +215,19 @@ public class Person {
            }
        } else {
            if (Math.random()<.5) {
+               move ();
+           }
+       }
+
+    }
+   
+   public void moveWithLockdown() {
+       if(infected > 0){
+           if (Math.random()<.1) {
+               move ();
+           }
+       } else {
+           if (Math.random()<.3) {
                move ();
            }
        }

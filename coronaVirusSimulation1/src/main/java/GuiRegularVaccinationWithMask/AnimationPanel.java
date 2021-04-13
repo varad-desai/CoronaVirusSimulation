@@ -31,15 +31,36 @@ public class AnimationPanel extends JPanel implements ActionListener {
     private Random random = new Random();
     private int steps = 0;
     
-    
+    public int getHeight() {
+ 		return height;
+ 	}
 
+ 	public void setHeight(int height) {
+ 		this.height = height;
+ 	}
+
+ 	public int getWidth() {
+ 		return width;
+ 	}
+
+ 	public void setWidth(int width) {
+ 		this.width = width;
+ 	}
+
+ 	public int getPopulation() {
+ 		return population;
+ 	}
+
+ 	public void setPopulation(int population) {
+ 		this.population = population;
+ 	}
    
     public AnimationPanel(int h, int w) {
         width = w;
         height = h;
         setPreferredSize(new Dimension(width, height));
         // populate the Person array with randomly placed people
-        for(int i=0;i<p.length;i++) {
+        for(int i=0;i<population;i++) {
             int x = random.nextInt(width);
             int y = random.nextInt(height);
             p[i] = new Person(x, y);
@@ -52,8 +73,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
    
     public void actionPerformed(ActionEvent e) {
         // at each step in the animation, move all the Person objects
-        //System.out.println(p.length);
-        for(int i=0;i<p.length;i++) {
+        //System.out.println(population);
+        for(int i=0;i<population;i++) {
        	 if (!p[i].died) {
     		 p[i].move();
     	 }
@@ -77,7 +98,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
             " Immune: "+calculate_no_of_immune()+
             " Susceptible: "+calculate_no_of_susceptible()+
             " Deaths: "+calculate_no_of_deaths()+
-            " Population: "+p.length
+            " Population: "+population
             );
         repaint();
     }
@@ -86,19 +107,21 @@ public class AnimationPanel extends JPanel implements ActionListener {
         double r_factor = 0.0;
         int count_infection_spreaders = 0;
         int sum = 0;
-        for(int i=0; i<p.length; i++){
+        for(int i=0; i<population; i++){
             if(p[i].no_of_person_infected != 0){
                 sum += p[i].no_of_person_infected;
                 count_infection_spreaders++;
             }
         }
-        r_factor = (double)sum/count_infection_spreaders;
+        if (count_infection_spreaders > 0) {
+     	   r_factor = (double)sum/count_infection_spreaders;
+        }
         return r_factor;
     }
    
     public int calculate_no_of_infected(){
         int no_of_infected = 0;
-        for(int i=0; i<p.length; i++){
+        for(int i=0; i<population; i++){
             if(p[i].infected > 0){
                 no_of_infected++;
             }
@@ -108,7 +131,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
    
     public int calculate_no_of_immune(){
         int no_of_immune = 0;
-        for(int i=0; i<p.length; i++){
+        for(int i=0; i<population; i++){
             if(p[i].immune) no_of_immune++;
         }
         int deaths = calculate_no_of_deaths();
@@ -117,7 +140,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
    
     public int calculate_no_of_susceptible(){
         int no_of_susceptible = 0;
-        for(int i=0; i<p.length; i++){
+        for(int i=0; i<population; i++){
             if(p[i].infected == 0) no_of_susceptible++;
         }
         return no_of_susceptible;
@@ -125,14 +148,14 @@ public class AnimationPanel extends JPanel implements ActionListener {
    
     public int calculate_no_of_deaths() {
         int no_of_deaths = 0;
-        for(int i=0; i<p.length; i++){
+        for(int i=0; i<population; i++){
             if(p[i].died) no_of_deaths++;
         }
         return no_of_deaths;
     }
     
     public void vaccinate_after_threshold(){
-        // randomy vaccinate 10 people
+        // randomly vaccinate 10 people
         int count = 0;
         while(count!=10){
             int random_person = random.nextInt(population);
@@ -145,8 +168,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
    
     public void handleCollisions(boolean mask_wearing_begins) {
         // compare all points with each other
-        for(int i=0;i<p.length;i++) {
-            for(int j=i+1;j<p.length;j++) {
+        for(int i=0;i<population;i++) {
+            for(int j=i+1;j<population;j++) {
                 int deltax = p[i].x - p[j].x;
                 int deltay = p[i].y - p[j].y;
                 double dist = Math.sqrt(deltax*deltax+deltay*deltay);
@@ -197,7 +220,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
         // each time we paint the screen, set the color based on 
         // who is infected and who isn't, and who has recovered
         super.paintComponent(g);
-        for(int i=0;i<p.length;i++) {
+        for(int i=0;i<population;i++) {
             if (p[i].infected > 0 && !p[i].immune) {
                 g.setColor(Color.red);
             } else if (p[i].died) {
