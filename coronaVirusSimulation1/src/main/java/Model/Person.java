@@ -18,6 +18,7 @@ public class Person {
    public boolean tested = false;
    public boolean testResult = false;
    public boolean died = false;
+   public boolean can_move = true;
    public int infected = 0; // when infected, this will be positive and increase until the
                             // infectedDuration is reached, at which point the person
                             // will be immune
@@ -190,17 +191,23 @@ public class Person {
     	}
     }
    
-   public void move() {
-      x += vel_x;
-      y += vel_y;
-      // if they hit the walls, bounce
-      if (x > width || x < 0) {
-         vel_x = -vel_x;
-      }
-      if (y > height || y < 0) {
-         vel_y = -vel_y;
-      }
-   }
+    public void move() {
+        if(can_move){
+            x += vel_x;
+            y += vel_y;
+//        if(reverse_direction){
+//            vel_x = -vel_x;
+//            vel_y = -vel_y;
+//        }
+        // if they hit the walls, bounce
+        if (x > width || x < 0) {
+            vel_x = -vel_x;
+        }
+        if (y > height || y < 0) {
+            vel_y = -vel_y;
+        }
+        }
+    }
 
     /**
      * Method to simulate that when person is quarantining then moves only for 10% of the time.
