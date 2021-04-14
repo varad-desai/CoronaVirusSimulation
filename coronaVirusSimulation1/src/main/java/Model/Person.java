@@ -14,6 +14,8 @@ public class Person {
    public int x;
    public int y;
    public boolean immune = false;
+   public int counter_for_quarantine = 0;
+   public boolean quarantine = false;
    public boolean vaccinated = false;
    public boolean tested = false;
    public boolean testResult = false;
@@ -227,6 +229,21 @@ public class Person {
        }
 
     }
+   
+   public void move_within_quarantine_boundaries() {
+       if(can_move){
+           x += vel_x;
+           y += vel_y;
+
+       // if they hit the walls, bounce
+       if (x > 170 || x < 0) {
+           vel_x = -vel_x;
+       }
+       if (y > height || y < 0) {
+           vel_y = -vel_y;
+       }
+       }
+   }
    
    public void moveWithLockdown() {
        if(infected > 0){

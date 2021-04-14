@@ -5,7 +5,7 @@
  */
 package GuiQuarantine;
 import GuiRegular.*;
-import GuiQuarantine.Person;
+import Model.Person;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
     private int height = 600; // screen height
     private int width = 800; // screen width
     
-    // Line co-ordinates for quarantine
+    // Line coordinates for quarantine
     private int x1 = 200;
     private int y1 = height;
     private int x2 = 200;
