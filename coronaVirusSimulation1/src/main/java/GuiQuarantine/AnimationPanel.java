@@ -79,7 +79,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
       // at each step in the animation, move all the Person objects
 //      System.out.println(p.length);
         for(int i=0;i<population;i++) {
-            if(p[i].counter_for_quarantine > 10 && !p[i].quarantine) {
+            if(p[i].counter_for_quarantine > 25 && !p[i].quarantine) {
                 move_to_quarantine(i);
             }
             if (!p[i].died && !p[i].quarantine) {
@@ -200,12 +200,13 @@ public class AnimationPanel extends JPanel implements ActionListener {
         super.paintComponent(g);
         g.drawLine(200,600, 200, 0);
         for(int i=0;i<population;i++) {
-            if (p[i].infected > 0 && !p[i].immune) {
+       	 	if (p[i].died) {
+       		 	g.setColor(Color.black);
+       	 	}
+       	 	else if (p[i].infected > 0 && !p[i].immune) {
                 g.setColor(Color.red);
                 p[i].counter_for_quarantine++;
-            } else if (p[i].died) {
-              	g.setColor(Color.black);
-            } else if (p[i].immune && !p[i].died) {
+            } else if (p[i].immune) {
                 g.setColor(Color.green);
                 
             } else {

@@ -169,10 +169,10 @@ public class AnimationPanel extends JPanel implements ActionListener {
       // who is infected and who isn't, and who has recovered
       super.paintComponent(g);
       for(int i=0;i<population;i++) {
-         if (p[i].infected > 0 && !p[i].immune) {
+    	 if (p[i].died) {
+         	 g.setColor(Color.black);
+    	 } else if (p[i].infected > 0 && !p[i].immune) {
             g.setColor(Color.red);
-         } else if (p[i].died) {
-        	 g.setColor(Color.black);
          } else if (p[i].immune) {
             g.setColor(Color.green);
          } else {

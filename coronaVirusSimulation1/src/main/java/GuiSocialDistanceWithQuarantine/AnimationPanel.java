@@ -14,19 +14,25 @@ public class AnimationPanel extends JPanel implements ActionListener {
     // Timer is needed for animation
     private Timer TM = new Timer(100, this);
     // the number of people in the simulation
-    private int population = 1000;
+    private int population = 750;
     // an array of Person objects
     private Person[] p = new Person[population];
     // how large to draw each Person
     private int CIRCLE_SIZE = 10;
-    private int infectDistance = 10;
     // how close two Persons need to be in order to infect one another
-    private int DISTANCE_FOR_INFECTION = 10;
+    private int infectDistance = 10;
     // height and width of the screen
     private int height = 600;
     private int width = 800;
+    
+    // Line coordinates for quarantine
+    private int x1 = 200;
+    private int y1 = height;
+    private int x2 = 200;
+    private int y2 = 0;
+    
     // random number generator to randomly place the people initially
-    private Random gen = new Random();
+    private Random random = new Random();
 
     //    System.out.println(population);
     int moveablePopulation =(population * 50)/100;
@@ -62,8 +68,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(width, height));
         // populate the Person array with randomly placed people
         for(int i=0;i<population;i++) {
-            int x = gen.nextInt(width);
-            int y = gen.nextInt(height);
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
             p[i] = new Person(x, y);
         }
         // set Patient 0- initially this is the only person infected
@@ -76,9 +82,19 @@ public class AnimationPanel extends JPanel implements ActionListener {
         // at each step in the animation, move 10% the Person objects
 
         for(int i=0; i<moveablePopulation; i++) {
-        	 if (!p[i].died) {
-        		 p[i].moveWithSocialDistance();
-        	 }
+            if(p[i].counter_for_quarantine > 50 && !p[i].quarantine) {
+                move_to_quarantine(i);
+            }
+            if (!p[i].died && !p[i].quarantine) {
+    		p[i].moveWithSocialDistance();
+            }
+            if (!p[i].died && p[i].quarantine){
+                p[i].move_within_quarantine_boundaries();
+            }
+            if(!p[i].died && p[i].immune && p[i].quarantine){
+                move_to_real_world(i);
+            }
+            p[i].checkForImmunity();
         }
         for(int i=0; i<population; i++){
             p[i].checkForImmunity();
@@ -119,25 +135,6 @@ public class AnimationPanel extends JPanel implements ActionListener {
             }
         }
     }
-    @Override
-    public void paintComponent(Graphics g) {
-        // each time we paint the screen, set the color based on
-        // who is infected and who isn't, and who has recovered
-        super.paintComponent(g);
-        for(int i=0;i<population;i++) {
-            if (p[i].infected > 0 && p[i].immune == false) {
-                g.setColor(Color.red);
-            } else if (p[i].died) {
-           	 g.setColor(Color.black);
-            } else if (p[i].immune) {
-                g.setColor(Color.green);
-            } else {
-                g.setColor(Color.blue);
-            }
-            g.fillOval(p[i].x, p[i].y, CIRCLE_SIZE, CIRCLE_SIZE);
-        }
-    }
-
 
     public double calculate_r_factor(){
         double r_factor = 0.0;
@@ -187,6 +184,38 @@ public class AnimationPanel extends JPanel implements ActionListener {
             if(p[i].died) no_of_deaths++;
         }
         return no_of_deaths;
+    }
+    
+    public void move_to_quarantine(int person_index){
+        p[person_index].quarantine = true; 
+        p[person_index].x = random.nextInt(x1-30);
+    }
+    
+    public void move_to_real_world(int person_index){
+        p[person_index].quarantine = false;
+        p[person_index].counter_for_quarantine = 0;
+        p[person_index].x = random.nextInt(width - (x1+30))+(x1+30);
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        // each time we paint the screen, set the color based on
+        // who is infected and who isn't, and who has recovered
+        super.paintComponent(g);
+        g.drawLine(200,600, 200, 0);
+        for(int i=0;i<population;i++) {
+        	if (p[i].died) {
+              	 g.setColor(Color.black);
+        	} else if (p[i].infected > 0 && p[i].immune == false) {
+                g.setColor(Color.red);
+                p[i].counter_for_quarantine++;
+            } else if (p[i].immune) {
+                g.setColor(Color.green);
+            } else {
+                g.setColor(Color.blue);
+            }
+            g.fillOval(p[i].x, p[i].y, CIRCLE_SIZE, CIRCLE_SIZE);
+        }
     }
 
 }

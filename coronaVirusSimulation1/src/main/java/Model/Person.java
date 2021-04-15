@@ -155,7 +155,7 @@ public class Person {
         if(infected > infected_duration/2 && infected < infected_duration){
             vaccinate_after_infection();
         }
-        if(infected > infected_duration/2 && infected < infected_duration){
+        if(infected == infected_duration-1){
             deathProbability();
         }
         // check to see if they've reached the immunity threshold
@@ -167,10 +167,8 @@ public class Person {
     }
    
     public void deathProbability() {
-    	if (infected == (infected_duration - 1)) {
             int random_number = random.nextInt(100);
             died = random_number >= 1 && random_number <= 2;
-    	}
     }
     
     public void vaccinate_after_infection(){
@@ -185,7 +183,7 @@ public class Person {
     // Assumption: once tested positive, person will take quarantine measures
     public void testing() {
     	int random_number = random.nextInt(100);
-    	if (infected > 0 && random_number <= 8) {
+    	if (infected > 0 && random_number <= 4) {
     		testResult = true;
     		}
     	else if (immune) {
@@ -246,15 +244,9 @@ public class Person {
    }
    
    public void moveWithLockdown() {
-       if(infected > 0){
-           if (Math.random()<.1) {
+           if (Math.random()<0.3) {
                move ();
            }
-       } else {
-           if (Math.random()<.3) {
-               move ();
-           }
-       }
 
     }
 }
