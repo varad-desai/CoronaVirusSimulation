@@ -30,6 +30,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
    
     private Random random = new Random();
     private int steps = 0;
+
+    private ChartVaccinationWithMask chartVaccinationWithMask = new ChartVaccinationWithMask();
     
     public int getHeight() {
  		return height;
@@ -100,6 +102,9 @@ public class AnimationPanel extends JPanel implements ActionListener {
             " Deaths: "+calculate_no_of_deaths()+
             " Population: "+population
             );
+        chartVaccinationWithMask.showChartVaccinationWithMask (mask_wearing_begins, calculated_r_factor,
+                calculate_no_of_infected(), calculate_no_of_immune(),
+                calculate_no_of_susceptible(), calculate_no_of_vaccinated(),calculate_no_of_deaths(), p.length);
         repaint();
     }
    
@@ -117,6 +122,16 @@ public class AnimationPanel extends JPanel implements ActionListener {
      	   r_factor = (double)sum/count_infection_spreaders;
         }
         return r_factor;
+    }
+
+    private int calculate_no_of_vaccinated() {
+        int no_of_vaccinated = 0;
+        for(int i=0; i<population; i++){
+            if(p[i].vaccinated){
+                no_of_vaccinated++;
+            }
+        }
+        return no_of_vaccinated;
     }
    
     public int calculate_no_of_infected(){
