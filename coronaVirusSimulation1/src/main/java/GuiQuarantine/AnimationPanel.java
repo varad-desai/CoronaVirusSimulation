@@ -25,6 +25,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
     private int infect_distance = 10;// how close 2 people can be to get infected
     private int height = 600; // screen height
     private int width = 800; // screen width
+    private  ChartGuiQuarantine chartGuiQuarantine = new ChartGuiQuarantine();
     
     // Line coordinates for quarantine
     private int x1 = 200;
@@ -102,11 +103,25 @@ public class AnimationPanel extends JPanel implements ActionListener {
               " Infected: "+calculate_no_of_infected()+
               " Immune: "+calculate_no_of_immune()+
               " Susceptible: "+calculate_no_of_susceptible()+
+              " Quarantine: "+calculate_no_of_quarantine ()+
               " Deaths: "+calculate_no_of_deaths()+
               " Population: "+population
               );
+      chartGuiQuarantine.showChartWithQuarantine(calculated_r_factor,calculate_no_of_infected(),
+               calculate_no_of_immune(),
+               calculate_no_of_susceptible(),calculate_no_of_quarantine(), calculate_no_of_deaths(), population);
       repaint();
    }
+
+    private int calculate_no_of_quarantine() {
+        int no_of_quarantine = 0;
+        for(int i=0; i< population; i++){
+            if(p[i].quarantine){
+                no_of_quarantine++;
+            }
+        }
+        return no_of_quarantine;
+    }
    
    public double calculate_r_factor(){
        double r_factor = 0.0;
