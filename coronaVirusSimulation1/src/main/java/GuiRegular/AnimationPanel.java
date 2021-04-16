@@ -24,6 +24,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
     private int infect_distance = 10;// how close 2 people can be to get infected
     private int height = 600; // screen height
 	private int width = 800; // screen width
+    private ChartGuiRegular chartGuiRegular = new ChartGuiRegular();
  
     private Random random = new Random();
     
@@ -87,6 +88,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
               " Deaths: "+calculate_no_of_deaths()+
               " Population: "+population
               );
+      chartGuiRegular.showChartRegular ( calculated_r_factor, calculate_no_of_infected(), calculate_no_of_immune(),
+               calculate_no_of_susceptible(), +calculate_no_of_deaths(), p.length);
       repaint();
    }
    
