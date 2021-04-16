@@ -24,6 +24,9 @@ public class AnimationPanel extends JPanel implements ActionListener {
     // height and width of the screen
     private int height = 600;
     private int width = 800;
+
+    private ChartGuiSocialDistanceWithQuarantine chartGuiSocialDistanceWithQuarantine =
+            new ChartGuiSocialDistanceWithQuarantine();
     
     // Line coordinates for quarantine
     private int x1 = 200;
@@ -109,6 +112,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
                 " Deaths: "+calculate_no_of_deaths()+
                 " Population: "+population
         );
+        chartGuiSocialDistanceWithQuarantine.showChartRegular(calculated_r_factor, calculate_no_of_infected(),
+                calculate_no_of_immune(), calculate_no_of_susceptible(), calculate_no_of_deaths(), population);
         repaint();
     }
 
