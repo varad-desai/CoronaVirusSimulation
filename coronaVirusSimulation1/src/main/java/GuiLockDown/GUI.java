@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package GuiLockDown;
+import GuiQuarantine.ChartGuiQuarantine;
 import GuiRegular.*;
+import javafx.application.Application;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -26,6 +29,7 @@ public class GUI {
       f.show();
       JButton stopButton = new JButton();
       ap.add(stopButton);
+      Application.launch (ChartLockDown.class);
    }
      
 }
