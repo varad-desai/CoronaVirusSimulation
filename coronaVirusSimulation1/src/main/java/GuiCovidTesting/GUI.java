@@ -9,10 +9,21 @@ public class GUI {
       int height = 600;
       int width = 800;
       JFrame f = new JFrame("covid-19");
-      f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       AnimationPanel ap = new AnimationPanel(height, width);
       f.getContentPane().add(ap);
       f.pack();
       f.show();
+      JButton stopJButton = new JButton("STOP");
+//      stopJButton.addActionListener(this)
+      ap.add(stopJButton);
    }
+     
+     private void stopJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        // TODO add your handling code here:
+        String[] args = {""};
+        Driver.DriverJFrame.main(args);
+    }  
+     
+     
 }

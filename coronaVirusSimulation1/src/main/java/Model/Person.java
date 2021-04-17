@@ -160,8 +160,8 @@ public class Person {
         }
         // check to see if they've reached the immunity threshold
         if(infected > infected_duration && !died) {
-            //infected = 0;
-        	immune = true;
+            infected = 0;
+            immune = true;
         }
 
     }
