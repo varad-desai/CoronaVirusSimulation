@@ -14,6 +14,8 @@ public class Person {
    public int x;
    public int y;
    public boolean immune = false;
+   public int counter_for_quarantine = 0;
+   public boolean quarantine = false;
    public boolean vaccinated = false;
    public boolean tested = false;
    public boolean testResult = false;
@@ -153,7 +155,7 @@ public class Person {
         if(infected > infected_duration/2 && infected < infected_duration){
             vaccinate_after_infection();
         }
-        if(infected > infected_duration/2 && infected < infected_duration){
+        if(infected == infected_duration-1){
             deathProbability();
         }
         // check to see if they've reached the immunity threshold
@@ -165,10 +167,8 @@ public class Person {
     }
    
     public void deathProbability() {
-    	if (infected == (infected_duration - 1)) {
             int random_number = random.nextInt(100);
             died = random_number >= 1 && random_number <= 2;
-    	}
     }
     
     public void vaccinate_after_infection(){
@@ -183,7 +183,7 @@ public class Person {
     // Assumption: once tested positive, person will take quarantine measures
     public void testing() {
     	int random_number = random.nextInt(100);
-    	if (infected > 0 && random_number <= 8) {
+    	if (infected > 0 && random_number <= 4) {
     		testResult = true;
     		}
     	else if (immune) {
@@ -228,16 +228,25 @@ public class Person {
 
     }
    
-   public void moveWithLockdown() {
-       if(infected > 0){
-           if (Math.random()<.1) {
-               move ();
-           }
-       } else {
-           if (Math.random()<.3) {
-               move ();
-           }
+   public void move_within_quarantine_boundaries() {
+       if(can_move){
+           x += vel_x;
+           y += vel_y;
+
+       // if they hit the walls, bounce
+       if (x > 170 || x < 0) {
+           vel_x = -vel_x;
        }
+       if (y > height || y < 0) {
+           vel_y = -vel_y;
+       }
+       }
+   }
+   
+   public void moveWithLockdown() {
+           if (Math.random()<0.3) {
+               move ();
+           }
 
     }
 }

@@ -6,6 +6,8 @@
 package GuiRegularVaccinationWithMask;
 import GuiRegularWithMask.*;
 import GuiRegular.*;
+import javafx.application.Application;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -23,5 +25,6 @@ public class GUI {
       f.getContentPane().add(ap);
       f.pack();
       f.show();
+      Application.launch (ChartVaccinationWithMask.class);
    }
 }

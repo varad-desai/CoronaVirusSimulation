@@ -19,10 +19,9 @@ import java.util.Random;
 public class AnimationPanel extends JPanel implements ActionListener {
    
     private Timer tm = new Timer(100, this); // timer for animation
-    private int population = 200;
+    private int population = 750;
     private Person[] p = new Person[population];
     private int social_distance = 60;
-    private ArrayList<ArrayList<Person>> people_within_social_distance = new ArrayList<>();
     private int circle_size = 10;
     private int infect_distance = 10;// how close 2 people can be to get infected
     private int height = 1000; // screen height
@@ -171,10 +170,10 @@ public class AnimationPanel extends JPanel implements ActionListener {
         // who is infected and who isn't, and who has recovered
         super.paintComponent(g);
         for(int i=0;i<p.length;i++) {
-            if (p[i].infected > 0 && !p[i].immune) {
+        	if (p[i].died) {
+            	g.setColor(Color.black);
+        	} else if (p[i].infected > 0 && !p[i].immune) {
                 g.setColor(Color.red);
-            } else if (p[i].died) {
-        	g.setColor(Color.black);
             } else if (p[i].immune) {
                 g.setColor(Color.green);
             } else {

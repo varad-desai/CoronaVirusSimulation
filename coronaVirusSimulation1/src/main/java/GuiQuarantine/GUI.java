@@ -5,6 +5,8 @@
  */
 package GuiQuarantine;
 import GuiRegular.*;
+import javafx.application.Application;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -23,5 +25,6 @@ public class GUI {
       
       f.pack();
       f.show();
+      Application.launch (ChartGuiQuarantine.class);
    }
 }

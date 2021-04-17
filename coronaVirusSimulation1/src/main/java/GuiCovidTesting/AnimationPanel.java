@@ -13,7 +13,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
     // Timer is needed for animation
    private Timer tm = new Timer(100, this);
    // the number of people in the simulation
-   private int population = 1000;
+   private int population = 750;
    // an array of Person objects
    private Person[] p = new Person[population];
    // how large to draw each Person
@@ -24,7 +24,13 @@ public class AnimationPanel extends JPanel implements ActionListener {
    private int height = 600;
    private int width = 800;
    // random number generator to randomly place the people initially
-   private Random gen = new Random();
+   private Random random = new Random();
+   
+   // Line coordinates for quarantine
+   private int x1 = 200;
+   private int y1 = height;
+   private int x2 = 200;
+   private int y2 = 0;
    
    public int getHeight() {
 		return height;
@@ -56,8 +62,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
       setPreferredSize(new Dimension(width, height));
       // populate the Person array with randomly placed people
       for(int i=0;i<population;i++) {
-         int x = gen.nextInt(width);
-         int y = gen.nextInt(height);
+         int x = random.nextInt(width);
+         int y = random.nextInt(height);
          p[i] = new Person(x, y);
       }
       // set Patient 0- initially this is the only person infected
@@ -70,14 +76,20 @@ public class AnimationPanel extends JPanel implements ActionListener {
       // at each step in the animation, move all the Person objects
 //      System.out.println(p.length);
        for(int i=0;i<population;i++) {
-       	p[i].testing();
-       	if (!p[i].testResult && !p[i].died) {	
-           p[i].move();
+    	if (i != 0) {
+    		p[i].testing();
        	}
-       	else if (p[i].testResult){
-       		p[i].moveWithSocialDistance();
-       	}
-           p[i].checkForImmunity();
+        if(p[i].testResult && !p[i].quarantine) {
+            move_to_quarantine(i);
+            p[i].move_within_quarantine_boundaries();
+        }
+        if (!p[i].quarantine) {
+        	p[i].move();
+        }
+        if(p[i].immune && p[i].quarantine){
+            move_to_real_world(i);
+        }
+        p[i].checkForImmunity();
        }
       // check to see if any of the people are close enough to infect someone
       handleCollisions();
@@ -145,6 +157,17 @@ public class AnimationPanel extends JPanel implements ActionListener {
        return no_of_deaths;
    }
    
+   public void move_to_quarantine(int person_index){
+       p[person_index].quarantine = true; 
+       p[person_index].x = random.nextInt(x1-30);
+   }
+   
+   public void move_to_real_world(int person_index){
+       p[person_index].quarantine = false;
+       p[person_index].counter_for_quarantine = 0;
+       p[person_index].x = random.nextInt(width - (x1+30))+(x1+30);
+   }
+   
    public void handleCollisions() {
       // compare each point to all the other points
       for(int i=0;i<population;i++) {
@@ -156,19 +179,30 @@ public class AnimationPanel extends JPanel implements ActionListener {
             // People who tested positive are assumed to quarantine for 2 weeks
             // This slows down the spread
             boolean allowed_to_get_infected;
-            int random_number = gen.nextInt(100);
-            allowed_to_get_infected = random_number >= 1 && random_number <= 1.25;
+            boolean quarantined_infection;
+            int random_number = random.nextInt(100);
+            int random_number2 = random.nextInt(100);
+            allowed_to_get_infected = random_number >= 0 && random_number <= 5;
+            quarantined_infection = (random_number2 == 1);
             // if the distance between 2 points is small enough, and one of
             // the Persons is infected, then infect the other Person
             if (dist < infectDistance) {
                if (p[i].infected > 0 && !p[i].immune && !p[j].immune && !p[i].died && p[j].infected == 0) {
-            	   if(allowed_to_get_infected){
+            	   if(p[i].quarantine && quarantined_infection){
+                       p[j].infected++;
+                       p[i].no_of_person_infected++;
+                   }
+            	   else if(!p[i].quarantine && allowed_to_get_infected){
                        p[j].infected++;
                        p[i].no_of_person_infected++;
                    }
                }
                if (p[j].infected > 0 && !p[j].immune && !p[i].immune && !p[j].died && p[i].infected == 0) {
-                   if(allowed_to_get_infected){
+            	   if(p[j].quarantine && quarantined_infection){
+                       p[i].infected++;
+                       p[j].no_of_person_infected++;
+                   }
+            	   else if(!p[j].quarantine && allowed_to_get_infected){
                 	   p[i].infected++;
                 	   p[j].no_of_person_infected++;
                    }
@@ -182,19 +216,19 @@ public class AnimationPanel extends JPanel implements ActionListener {
       // each time we paint the screen, set the color based on 
       // who is infected and who isn't, and who has recovered
       super.paintComponent(g);
+      g.drawLine(200,600, 200, 0);
       for(int i=0;i<population;i++) {
-         if (p[i].infected > 0 && !p[i].immune) {
+    	 if (p[i].died) {
+    		 g.setColor(Color.black);
+    	 }
+    	 else if (p[i].infected > 0 && !p[i].immune) {
         	 if(p[i].testResult) {
         	 g.setColor(Color.pink);
         	 }
         	 else {
         		 g.setColor(Color.red);
         	 }
-         }
-         	else if (p[i].died) {
-        	g.setColor(Color.black);
-         }
-         	else if (p[i].immune) {
+         } else if (p[i].immune) {
             g.setColor(Color.green);
          } else {
             g.setColor(Color.blue);

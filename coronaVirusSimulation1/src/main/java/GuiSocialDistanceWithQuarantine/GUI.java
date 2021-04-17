@@ -1,4 +1,6 @@
 package GuiSocialDistanceWithQuarantine;
+import javafx.application.Application;
+
 import javax.swing.*;
 
 public class GUI {
@@ -11,5 +13,6 @@ public class GUI {
         f.getContentPane().add(ap);
         f.pack();
         f.show();
+        Application.launch (ChartGuiSocialDistanceWithQuarantine.class);
     }
 }
