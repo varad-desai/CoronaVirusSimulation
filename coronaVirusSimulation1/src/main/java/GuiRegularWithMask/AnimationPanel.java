@@ -27,6 +27,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
     private int width = 800; // screen width
    
     private Random random = new Random();
+
+    private ChartRegularWithMask chartRegularWithMask = new ChartRegularWithMask ();
     
     public int getHeight() {
  		return height;
@@ -94,6 +96,9 @@ public class AnimationPanel extends JPanel implements ActionListener {
             " Deaths: "+calculate_no_of_deaths()+
             " Population: "+population
             );
+
+        chartRegularWithMask.showChartWithMask (mask_wearing_begins, calculated_r_factor, no_of_infected,calculate_no_of_immune (),
+                calculate_no_of_susceptible (),calculate_no_of_deaths (),population);
         repaint();
     }
    

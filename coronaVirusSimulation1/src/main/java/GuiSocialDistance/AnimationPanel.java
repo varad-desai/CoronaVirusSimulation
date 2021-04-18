@@ -28,6 +28,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
     private int width = 1000; // screen width
  
     private Random random = new Random();
+
+    private ChartSocialDistance chartSocialDistance = new ChartSocialDistance ();
    
    
     public AnimationPanel(int h, int w) {
@@ -71,7 +73,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
             " Deaths: "+calculate_no_of_deaths()+
             " Population: "+p.length
             );
-        
+        chartSocialDistance.showChartWithSocialDisatnce (calculated_r_factor, calculate_no_of_infected (),calculate_no_of_immune (),
+                calculate_no_of_susceptible (),calculate_no_of_deaths (),population);
         repaint();
     }
    

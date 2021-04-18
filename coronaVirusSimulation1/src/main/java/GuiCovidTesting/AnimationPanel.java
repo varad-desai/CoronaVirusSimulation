@@ -31,7 +31,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
    private int y1 = height;
    private int x2 = 200;
    private int y2 = 0;
-   
+
+   private ChartCovidTesting chartCovidTesting = new ChartCovidTesting ();
    public int getHeight() {
 		return height;
 	}
@@ -102,6 +103,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
               " Deaths: "+calculate_no_of_deaths()+
               " Population: "+population
               );
+       chartCovidTesting.showChartWithCovidTesting(calculated_r_factor, calculate_no_of_infected (), calculate_no_of_immune (),
+               calculate_no_of_susceptible (),calculate_no_of_deaths (), population);
       repaint();
    }
    

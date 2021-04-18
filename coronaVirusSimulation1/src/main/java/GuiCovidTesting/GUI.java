@@ -1,5 +1,8 @@
 package GuiCovidTesting;
+import GuiLockDown.ChartLockDown;
 import GuiRegular.*;
+import javafx.application.Application;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,6 +20,7 @@ public class GUI {
       JButton stopJButton = new JButton("STOP");
 //      stopJButton.addActionListener(this)
       ap.add(stopJButton);
+      Application.launch (ChartCovidTesting.class);
    }
      
      private void stopJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
