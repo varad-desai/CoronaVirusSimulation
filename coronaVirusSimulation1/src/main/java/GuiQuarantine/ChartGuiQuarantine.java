@@ -73,7 +73,7 @@ public class ChartGuiQuarantine extends Application {
         //creating the chart
         areaChart = new AreaChart<String, Number> (xAxis,yAxis);
 
-        areaChart.setTitle("CoronaVirus LineChart");
+        areaChart.setTitle("CoronaVirus Quarantine Chart");
         //defining a series
         seriesInfected.setName("Infected");
         seriesImmune.setName("Immune");

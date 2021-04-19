@@ -70,7 +70,7 @@ public class ChartGuiSocialDistanceWithQuarantine extends Application {
         //creating the chart
         lineChart = new LineChart<String, Number>(xAxis,yAxis);
 
-        lineChart.setTitle("CoronaVirus LineChart");
+        lineChart.setTitle("CoronaVirus Social Distancing with Quarantine Effect Chart");
         //defining a series
         seriesInfected.setName("Infected");
         seriesImmune.setName("Immune");

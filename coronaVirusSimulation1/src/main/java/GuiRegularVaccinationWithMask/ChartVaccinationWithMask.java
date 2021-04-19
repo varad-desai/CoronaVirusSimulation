@@ -77,7 +77,7 @@ public class ChartVaccinationWithMask extends Application {
         //creating the chart
         areaChart = new AreaChart<String, Number> (xAxis,yAxis);
 
-        areaChart.setTitle("Infection Control Mask Usage");
+        areaChart.setTitle("Infection Control with Mask and Vaccination");
         //defining a series
         seriesInfected.setName("Infected");
         seriesImmune.setName("Immune");
