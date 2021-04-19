@@ -2,18 +2,29 @@ package GuiRegular;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author divya kulkarni
+ */
 public class ChartGuiRegular extends Application {
     public static int timeCounter = 0;
     private boolean maskIndicator = false;
@@ -23,15 +34,11 @@ public class ChartGuiRegular extends Application {
     private static Series seriesImmune = new Series();
     private static Series seriesDeaths = new Series();
     private static Series seriesSusceptible = new Series();
-
-//    private static XYChart.Series barChartSeries = new XYChart.Series();
-//    private static CategoryAxis xAxisBarChart= new CategoryAxis();
-//    private static NumberAxis yAxisBarChart = new NumberAxis(0, 1100, 5);
-//    private static Group root = new Group ();
-
     private Scene scene ;
     private AreaChart<String, Number> areaChart;
-//    private static BarChart<String, Number> barChart = new BarChart<String, Number>(xAxisBarChart, yAxisBarChart);
+    Text text = new Text ();
+    private static DoubleProperty r_factor_string = new SimpleDoubleProperty (0);
+
 
     public void showChartRegular( double r_factor, int no_of_infected, int no_of_immune,
         int no_of_susceptible, int no_of_deaths, int length){
@@ -39,14 +46,7 @@ public class ChartGuiRegular extends Application {
             System.out.println ("no of infected = " + no_of_infected +
                                 " no of immune = " + no_of_immune );
 
-//            if(mask_wearing_begins && !maskIndicator) {
-//                // add a line indicating usage of mask started
-//                System.out.println ("Drawing circle...");
-//                Circle circle = new Circle(timeCounter, no_of_infected, 5.0f);
-//                circle.setAccessibleText ("Mask Usage Started");
-//                root.getChildren ().add (circle);
-//                maskIndicator = true;
-//            }
+            r_factor_string.set (r_factor);
 
             Date now = new Date();
             seriesInfected.getData().add(new XYChart.Data(simpleDateFormat.format(now), no_of_infected));
@@ -54,13 +54,6 @@ public class ChartGuiRegular extends Application {
             seriesDeaths.getData().add(new XYChart.Data(simpleDateFormat.format(now), no_of_deaths));
             seriesSusceptible.getData().add(new XYChart.Data(simpleDateFormat.format(now), no_of_susceptible));
 
-
-//            // BAR Chart Series
-//            XYChart.Series barChartSeries = new XYChart.Series();
-//            barChartSeries.getData().add(new XYChart.Data("Infected", no_of_infected));
-//            barChartSeries.getData().add(new XYChart.Data("Susceptible", no_of_susceptible));
-//            barChart.getData().add(barChartSeries);
-//            //timeCounter ++;
                 });
 
     }
@@ -68,7 +61,11 @@ public class ChartGuiRegular extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("");
-// AreaChart Data
+        Label label = new Label ();
+        label.setText ("R Factor: ");
+        text.textProperty ().bind (r_factor_string.asString ());
+
+        // AreaChart Data
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis(0, 1100, 5);
 
@@ -85,34 +82,22 @@ public class ChartGuiRegular extends Application {
         seriesSusceptible.setName("Susceptible");
         areaChart.getData().addAll(seriesImmune, seriesInfected, seriesDeaths, seriesSusceptible);
         //areaChart.setPrefSize(280,180);
-
-//// BAR chart data
-//
-//        xAxisBarChart.setLabel("Category");
-//
-//
-//        yAxisBarChart.setLabel("Value");
-//        barChart = new BarChart(xAxisBarChart,yAxisBarChart);
-//        barChart.setTitle("CoronaVirus BarChart");
-//        barChartSeries.setName("CoronaInfectionsVsImmune");
-//
-//        barChart.getData().addAll(barChartSeries);
-//        barChart.setPrefSize(280,180);
-
-
-//Creating a Group object
-        //root = new Group (areaChart);
-        //root.getChildren ().addAll (areaChart,barChart);
-        //SplitPane pane = new SplitPane(areaChart,barChart);
-        SplitPane pane = new SplitPane(areaChart);
-
-        scene = new Scene(pane,595,350);
+        GridPane grid = new GridPane ();
+        // Setting up R factor position on the screen
+        grid.setLayoutX (60);
+        grid.setLayoutY (5);
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets (25, 25, 25, 25));
+        grid.add(label, 0, 1);
+        grid.add (text, 1,1);
+        Group root = new Group (areaChart,grid);
+        scene = new Scene(root,595,350);
 
         stage.setScene(scene);
         areaChart.prefHeightProperty ().bind (scene.heightProperty ());
         areaChart.prefWidthProperty ().bind (scene.widthProperty ());
-        //barChart.prefHeightProperty().bind(scene.heightProperty());
-        //barChart.prefWidthProperty().bind(scene.widthProperty());
 
         stage.show();
 
