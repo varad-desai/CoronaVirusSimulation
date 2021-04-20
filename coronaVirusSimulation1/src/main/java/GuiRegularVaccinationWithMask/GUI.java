@@ -25,6 +25,6 @@ public class GUI {
       f.getContentPane().add(ap);
       f.pack();
       f.show();
-      Application.launch (ChartVaccinationWithMask.class);
+      //Application.launch (ChartVaccinationWithMask.class);
    }
 }
