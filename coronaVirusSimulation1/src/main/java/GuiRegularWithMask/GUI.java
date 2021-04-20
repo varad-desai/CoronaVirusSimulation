@@ -27,6 +27,6 @@ public class GUI {
       f.getContentPane().add(ap);
       f.pack();
       f.show();
-      Application.launch (ChartRegularWithMask.class);
+      //Application.launch (ChartRegularWithMask.class);
    }
 }

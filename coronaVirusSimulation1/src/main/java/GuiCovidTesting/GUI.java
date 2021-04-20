@@ -20,7 +20,7 @@ public class GUI {
       JButton stopJButton = new JButton("STOP");
 //      stopJButton.addActionListener(this)
       ap.add(stopJButton);
-      Application.launch (ChartCovidTesting.class);
+      //Application.launch (ChartCovidTesting.class);
    }
      
      private void stopJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  

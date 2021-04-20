@@ -5,6 +5,15 @@
  */
 package Driver;
 
+import GuiCovidTesting.ChartCovidTesting;
+import GuiLockDown.ChartLockDown;
+import GuiQuarantine.ChartGuiQuarantine;
+import GuiRegularVaccinationWithMask.ChartVaccinationWithMask;
+import GuiRegularWithMask.ChartRegularWithMask;
+import GuiSocialDistance.ChartSocialDistance;
+import GuiSocialDistanceWithQuarantine.ChartGuiSocialDistanceWithQuarantine;
+import javafx.application.Application;
+
 /**
  *  This will be the driver for the project
  * @author varad
@@ -159,57 +168,98 @@ public class DriverJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lockDownjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lockDownjButtonActionPerformed
-        // TODO add your handling code here:
-//        String[] args = {""};
-//        GuiLockDown.GUI.main(args);
+        Runnable myRunnable =
+                new Runnable(){
+                    public void run(){
+                        Application.launch (ChartLockDown.class);
+                    }
+                };
+        Thread thread = new Thread(myRunnable);
+        thread.start();
+
+
         String[] args = {""};
         GuiLockDown.GUI.main(args);
+
     }//GEN-LAST:event_lockDownjButtonActionPerformed
 
     private void quarantingJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quarantingJButtonActionPerformed
-        // TODO add your handling code here:
+        Runnable myRunnable =
+                new Runnable(){
+                    public void run(){
+                        Application.launch (ChartGuiQuarantine.class);
+                    }
+                };
+        Thread thread = new Thread(myRunnable);
+        thread.start();
         String[] args = {""};
         GuiQuarantine.GUI.main(args);
     }//GEN-LAST:event_quarantingJButtonActionPerformed
 
     private void testingJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testingJButtonActionPerformed
-        // TODO add your handling code here:
+        Runnable myRunnable =
+                new Runnable(){
+                    public void run(){
+                        Application.launch (ChartCovidTesting.class);
+                    }
+                };
         String[] args = {""};
         GuiCovidTesting.GUI.main(args);
+
     }//GEN-LAST:event_testingJButtonActionPerformed
 
     private void maskJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maskJButtonActionPerformed
-        // TODO add your handling code here:
+        Runnable myRunnable =
+                new Runnable(){
+                    public void run(){
+                        Application.launch (ChartRegularWithMask.class);
+                    }
+                };
         String[] args = {""};
         GuiRegularWithMask.GUI.main(args);
     }//GEN-LAST:event_maskJButtonActionPerformed
 
     private void vaccinationWithMaskJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaccinationWithMaskJButtonActionPerformed
-        // TODO add your handling code here:
+        Runnable myRunnable =
+                new Runnable(){
+                    public void run(){
+                        Application.launch (ChartVaccinationWithMask.class);
+                    }
+                };
         String[] args = {""};
         GuiRegularVaccinationWithMask.GUI.main(args);
     }//GEN-LAST:event_vaccinationWithMaskJButtonActionPerformed
 
     private void socialDistanceJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_socialDistanceJButtonActionPerformed
-        // TODO add your handling code here:
+        Runnable myRunnable =
+                new Runnable(){
+                    public void run(){
+                        Application.launch (ChartSocialDistance.class);
+                    }
+                };
         String[] args = {""};
         GuiSocialDistance.GUI.main(args);
     }//GEN-LAST:event_socialDistanceJButtonActionPerformed
 
     private void socialDistanceWithQuarantineJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_socialDistanceWithQuarantineJButtonActionPerformed
-        // TODO add your handling code here:
+        Runnable myRunnable =
+                new Runnable(){
+                    public void run(){
+                        Application.launch (ChartGuiSocialDistanceWithQuarantine.class);
+                    }
+                };
         String[] args = {""};
         GuiSocialDistanceWithQuarantine.GUI.main(args);
     }//GEN-LAST:event_socialDistanceWithQuarantineJButtonActionPerformed
 
     private void nothingJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nothingJButtonActionPerformed
-        // TODO add your handling code here:
+
         String[] args = {""};
         GuiRegular.GUI.main(args);
     }//GEN-LAST:event_nothingJButtonActionPerformed
 
     private void stopJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopJButton1ActionPerformed
-        // TODO add your handling code here:
+
         dispose();
         String[] args = {""};
         Driver.DriverJFrame.main(args);

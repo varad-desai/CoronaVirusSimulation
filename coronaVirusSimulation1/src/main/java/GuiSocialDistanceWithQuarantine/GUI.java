@@ -13,6 +13,6 @@ public class GUI {
         f.getContentPane().add(ap);
         f.pack();
         f.show();
-        Application.launch (ChartGuiSocialDistanceWithQuarantine.class);
+        //Application.launch (ChartGuiSocialDistanceWithQuarantine.class);
     }
 }

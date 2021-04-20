@@ -25,6 +25,6 @@ public class GUI {
       
       f.pack();
       f.show();
-      Application.launch (ChartGuiQuarantine.class);
+      //Application.launch (ChartGuiQuarantine.class);
    }
 }

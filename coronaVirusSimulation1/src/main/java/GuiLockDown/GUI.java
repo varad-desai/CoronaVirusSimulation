@@ -29,7 +29,7 @@ public class GUI {
       f.show();
       JButton stopButton = new JButton();
       ap.add(stopButton);
-      Application.launch (ChartLockDown.class);
+      //Application.launch (ChartLockDown.class);
    }
      
 }
