@@ -17,17 +17,10 @@ public class GUI {
       f.getContentPane().add(ap);
       f.pack();
       f.show();
-      JButton stopJButton = new JButton("STOP");
-//      stopJButton.addActionListener(this)
-      ap.add(stopJButton);
       //Application.launch (ChartCovidTesting.class);
    }
      
-     private void stopJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        // TODO add your handling code here:
-        String[] args = {""};
-        Driver.DriverJFrame.main(args);
-    }  
+   
      
      
 }
