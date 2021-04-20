@@ -97,7 +97,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
             " Population: "+population
             );
 
-        chartRegularWithMask.showChartWithMask (mask_wearing_begins, calculated_r_factor, no_of_infected,calculate_no_of_immune (),
+        chartRegularWithMask.showChartWithMask (calculated_r_factor, mask_wearing_begins, calculated_r_factor, no_of_infected,calculate_no_of_immune (),
                 calculate_no_of_susceptible (),calculate_no_of_deaths (),population);
         repaint();
     }
