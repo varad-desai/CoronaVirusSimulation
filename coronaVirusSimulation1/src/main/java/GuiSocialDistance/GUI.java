@@ -24,6 +24,6 @@ public class GUI {
       f.getContentPane().add(ap);
       f.pack();
       f.show();
-      //Application.launch (ChartSocialDistance.class);
+//      Application.launch (ChartSocialDistance.class);
    }
 }
