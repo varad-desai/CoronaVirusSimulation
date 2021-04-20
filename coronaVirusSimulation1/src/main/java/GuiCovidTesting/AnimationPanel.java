@@ -62,11 +62,12 @@ public class AnimationPanel extends JPanel implements ActionListener {
       height = h;
       setPreferredSize(new Dimension(width, height));
       // populate the Person array with randomly placed people
-      for(int i=0;i<population;i++) {
-         int x = random.nextInt(width);
-         int y = random.nextInt(height);
-         p[i] = new Person(x, y);
-      }
+       for(int i=0;i<population;i++) {
+//            int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
+            int x = random.nextInt(width - x1) + x1;
+            int y = random.nextInt(height);
+            p[i] = new Person(x, y);
+        }
       // set Patient 0- initially this is the only person infected
       p[0].infected = 1;
       // start the timer!
@@ -85,7 +86,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
             p[i].move_within_quarantine_boundaries();
         }
         if (!p[i].quarantine) {
-        	p[i].move();
+        	p[i].move_in_real_world();
         }
         if(p[i].immune && p[i].quarantine){
             move_to_real_world(i);
