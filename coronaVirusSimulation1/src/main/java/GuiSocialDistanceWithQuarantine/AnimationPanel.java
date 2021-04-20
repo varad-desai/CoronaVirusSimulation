@@ -71,7 +71,8 @@ public class AnimationPanel extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(width, height));
         // populate the Person array with randomly placed people
         for(int i=0;i<population;i++) {
-            int x = random.nextInt(width);
+//            int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
+            int x = random.nextInt(width - x1) + x1;
             int y = random.nextInt(height);
             p[i] = new Person(x, y);
         }
@@ -89,7 +90,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
                 move_to_quarantine(i);
             }
             if (!p[i].died && !p[i].quarantine) {
-    		p[i].moveWithSocialDistance();
+    		p[i].moveWithSocialDistanceInRealWorld();
             }
             if (!p[i].died && p[i].quarantine){
                 p[i].move_within_quarantine_boundaries();

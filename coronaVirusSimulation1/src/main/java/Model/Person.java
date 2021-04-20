@@ -228,6 +228,38 @@ public class Person {
 
     }
    
+      public void moveWithSocialDistanceInRealWorld() {
+       if(infected > 0){
+           // person is infected, so next person will be following at home quarantine
+           if (Math.random()<.1) {
+               move_in_real_world();
+           }
+       } else {
+           if (Math.random()<.5) {
+               move_in_real_world();
+           }
+       }
+
+    }
+   
+       public void move_in_real_world() {
+        if(can_move){
+            x += vel_x;
+            y += vel_y;
+//        if(reverse_direction){
+//            vel_x = -vel_x;
+//            vel_y = -vel_y;
+//        }
+        // if they hit the walls, bounce
+        if (x > width || x < 230) {
+            vel_x = -vel_x;
+        }
+        if (y > height || y < 0) {
+            vel_y = -vel_y;
+        }
+        }
+    }
+   
    public void move_within_quarantine_boundaries() {
        if(can_move){
            x += vel_x;
