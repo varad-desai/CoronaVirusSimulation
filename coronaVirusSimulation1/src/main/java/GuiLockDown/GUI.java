@@ -27,8 +27,7 @@ public class GUI {
       f.getContentPane().add(ap);
       f.pack();
       f.show();
-      JButton stopButton = new JButton();
-      ap.add(stopButton);
+     
       //Application.launch (ChartLockDown.class);
    }
      
