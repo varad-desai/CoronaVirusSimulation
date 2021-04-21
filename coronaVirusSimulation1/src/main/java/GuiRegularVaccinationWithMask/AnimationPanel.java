@@ -18,7 +18,7 @@ import java.util.Random;
  */
 public class AnimationPanel extends JPanel implements ActionListener {
     private Timer tm = new Timer(100, this); // timer for animation
-    private int population = 750;
+    private int population = 1000;
     private int threshold_for_mask = (population*10)/100;
     private int threshold_for_vaccination = (population*10)/100;
     private boolean mask_wearing_begins = false;

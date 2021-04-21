@@ -14,7 +14,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
     // Timer is needed for animation
     private Timer TM = new Timer(100, this);
     // the number of people in the simulation
-    private int population = 750;
+    private int population = 1000;
     // an array of Person objects
     private Person[] p = new Person[population];
     // how large to draw each Person

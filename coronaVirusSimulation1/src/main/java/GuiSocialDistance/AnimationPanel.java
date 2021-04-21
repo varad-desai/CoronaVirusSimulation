@@ -18,7 +18,7 @@ import java.util.Random;
 public class AnimationPanel extends JPanel implements ActionListener {
    
     private Timer tm = new Timer(100, this); // timer for animation
-    private int population = 750;
+    private int population = 200;
     private Person[] p = new Person[population];
     private int social_distance = 60;
     private int circle_size = 10;
@@ -178,13 +178,13 @@ public class AnimationPanel extends JPanel implements ActionListener {
                     p[i].can_move = false;
                     if(Math.abs(deltax)<social_distance){
                         if(!p[i].died && !p[j].died){
-                            p[i].x += p[i].getVel_x();
-                            p[j].x -= p[j].getVel_x();
+                            p[i].x += p[i].getVel_x()/2;
+                            p[j].x -= p[j].getVel_x()/2;
                         }
                     } else {
                         if(!p[i].died && !p[j].died){
-                            p[i].y += p[i].getVel_y();
-                            p[j].y -= p[j].getVel_y();
+                            p[i].y += p[i].getVel_y()/2;
+                            p[j].y -= p[j].getVel_y()/2;
                         }
                     }
 
