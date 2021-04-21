@@ -18,7 +18,7 @@ import java.awt.*;
  * 1. 80% population is under lockdown 20% population can move 
  */
 public class GUI {
-     public static void main(String[] args) {
+     public static void demo() {
       int height = 600;
       int width = 800;
       JFrame f = new JFrame("corona");
