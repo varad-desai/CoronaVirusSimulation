@@ -8,17 +8,21 @@ package Driver;
 import GuiCovidTesting.ChartCovidTesting;
 import GuiLockDown.ChartLockDown;
 import GuiQuarantine.ChartGuiQuarantine;
+import GuiRegular.ChartGuiRegular;
 import GuiRegularVaccinationWithMask.ChartVaccinationWithMask;
 import GuiRegularWithMask.ChartRegularWithMask;
 import GuiSocialDistance.ChartSocialDistance;
 import GuiSocialDistanceWithQuarantine.ChartGuiSocialDistanceWithQuarantine;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 
 /**
  *  This will be the driver for the project
  * @author varad
  */
 public class DriverJFrame extends javax.swing.JFrame {
+    private static volatile boolean javaFxLaunched = false;
 
     /**
      * Creates new form DriverJFrame
@@ -168,92 +172,168 @@ public class DriverJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lockDownjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lockDownjButtonActionPerformed
-        Runnable myRunnable =
-                new Runnable(){
-                    public void run(){
-                        Application.launch (ChartLockDown.class);
-                    }
-                };
-        Thread thread = new Thread(myRunnable);
-        thread.start();
-
-
+        if (!javaFxLaunched) { // First time
+            Platform.setImplicitExit(false);
+            new Thread(()->Application.launch(ChartLockDown.class)).start();
+            javaFxLaunched = true;
+        } else { // Next times
+            Platform.runLater(()->{
+                try {
+                    Application application = ChartLockDown.class.newInstance();
+                    Stage primaryStage = new Stage ();
+                    application.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
         String[] args = {""};
         GuiLockDown.GUI.main(args);
 
     }//GEN-LAST:event_lockDownjButtonActionPerformed
 
     private void quarantingJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quarantingJButtonActionPerformed
-        Runnable myRunnable =
-                new Runnable(){
-                    public void run(){
-                        Application.launch (ChartGuiQuarantine.class);
-                    }
-                };
-        Thread thread = new Thread(myRunnable);
-        thread.start();
+        if (!javaFxLaunched) { // First time
+            Platform.setImplicitExit(false);
+            new Thread(()->Application.launch(ChartGuiQuarantine.class)).start();
+            javaFxLaunched = true;
+        } else { // Next times
+            Platform.runLater(()->{
+                try {
+                    Application application = ChartGuiQuarantine.class.newInstance();
+                    Stage primaryStage = new Stage ();
+                    application.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
         String[] args = {""};
         GuiQuarantine.GUI.main(args);
     }//GEN-LAST:event_quarantingJButtonActionPerformed
 
     private void testingJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testingJButtonActionPerformed
-        Runnable myRunnable =
-                new Runnable(){
-                    public void run(){
-                        Application.launch (ChartCovidTesting.class);
-                    }
-                };
+        if (!javaFxLaunched) { // First time
+            Platform.setImplicitExit(false);
+            new Thread(()->Application.launch(ChartCovidTesting.class)).start();
+            javaFxLaunched = true;
+        } else { // Next times
+            Platform.runLater(()->{
+                try {
+                    Application application = ChartCovidTesting.class.newInstance();
+                    Stage primaryStage = new Stage ();
+                    application.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
         String[] args = {""};
         GuiCovidTesting.GUI.main(args);
 
     }//GEN-LAST:event_testingJButtonActionPerformed
 
     private void maskJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maskJButtonActionPerformed
-        Runnable myRunnable =
-                new Runnable(){
-                    public void run(){
-                        Application.launch (ChartRegularWithMask.class);
-                    }
-                };
+        if (!javaFxLaunched) { // First time
+            Platform.setImplicitExit(false);
+            new Thread(()->Application.launch(ChartRegularWithMask.class)).start();
+            javaFxLaunched = true;
+        } else { // Next times
+            Platform.runLater(()->{
+                try {
+                    Application application = ChartRegularWithMask.class.newInstance();
+                    Stage primaryStage = new Stage ();
+                    application.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
         String[] args = {""};
         GuiRegularWithMask.GUI.main(args);
     }//GEN-LAST:event_maskJButtonActionPerformed
 
     private void vaccinationWithMaskJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaccinationWithMaskJButtonActionPerformed
-        Runnable myRunnable =
-                new Runnable(){
-                    public void run(){
-                        Application.launch (ChartVaccinationWithMask.class);
-                    }
-                };
+
+        if (!javaFxLaunched) { // First time
+            Platform.setImplicitExit(false);
+            new Thread(()->Application.launch(ChartVaccinationWithMask.class)).start();
+            javaFxLaunched = true;
+        } else { // Next times
+            Platform.runLater(()->{
+                try {
+                    Application application = ChartVaccinationWithMask.class.newInstance();
+                    Stage primaryStage = new Stage ();
+                    application.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
         String[] args = {""};
         GuiRegularVaccinationWithMask.GUI.main(args);
     }//GEN-LAST:event_vaccinationWithMaskJButtonActionPerformed
 
     private void socialDistanceJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_socialDistanceJButtonActionPerformed
-        Runnable myRunnable =
-                new Runnable(){
-                    public void run(){
-                        Application.launch (ChartSocialDistance.class);
-                    }
-                };
+
+        if (!javaFxLaunched) { // First time
+            Platform.setImplicitExit(false);
+            new Thread(()->Application.launch(ChartSocialDistance.class)).start();
+            javaFxLaunched = true;
+        } else { // Next times
+            Platform.runLater(()->{
+                try {
+                    Application application = ChartSocialDistance.class.newInstance();
+                    Stage primaryStage = new Stage ();
+                    application.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
         String[] args = {""};
         GuiSocialDistance.GUI.main(args);
     }//GEN-LAST:event_socialDistanceJButtonActionPerformed
 
     private void socialDistanceWithQuarantineJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_socialDistanceWithQuarantineJButtonActionPerformed
-        Runnable myRunnable =
-                new Runnable(){
-                    public void run(){
-                        Application.launch (ChartGuiSocialDistanceWithQuarantine.class);
-                    }
-                };
+
+        if (!javaFxLaunched) { // First time
+            Platform.setImplicitExit(false);
+            new Thread(()->Application.launch(ChartGuiSocialDistanceWithQuarantine.class)).start();
+            javaFxLaunched = true;
+        } else { // Next times
+            Platform.runLater(()->{
+                try {
+                    Application application = ChartGuiSocialDistanceWithQuarantine.class.newInstance();
+                    Stage primaryStage = new Stage ();
+                    application.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
         String[] args = {""};
         GuiSocialDistanceWithQuarantine.GUI.main(args);
     }//GEN-LAST:event_socialDistanceWithQuarantineJButtonActionPerformed
 
     private void nothingJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nothingJButtonActionPerformed
 
+
+        if (!javaFxLaunched) { // First time
+            Platform.setImplicitExit(false);
+            new Thread(()->Application.launch(ChartGuiRegular.class)).start();
+            javaFxLaunched = true;
+        } else { // Next times
+            Platform.runLater(()->{
+                try {
+                    Application application = ChartGuiRegular.class.newInstance();
+                    Stage primaryStage = new Stage ();
+                    application.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
         String[] args = {""};
         GuiRegular.GUI.main(args);
     }//GEN-LAST:event_nothingJButtonActionPerformed

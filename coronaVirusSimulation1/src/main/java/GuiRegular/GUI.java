@@ -23,6 +23,6 @@ public class GUI {
       f.getContentPane().add(ap);
       f.pack();
       f.show();
-      Application.launch (ChartGuiRegular.class);
+      //Application.launch (ChartGuiRegular.class);
    }
 }
