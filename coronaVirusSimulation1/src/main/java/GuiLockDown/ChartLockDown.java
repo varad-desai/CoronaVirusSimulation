@@ -91,7 +91,7 @@ public class ChartLockDown extends Application {
         grid.add (text, 1,1);
         Group root = new Group (areaChart,grid);
 
-        scene = new Scene(root,600,800);
+        scene = new Scene(root,600,400);
 
         stage.setScene(scene);
         areaChart.prefHeightProperty ().bind (scene.heightProperty ());

@@ -94,7 +94,7 @@ public class ChartSocialDistance extends Application {
         grid.add (text, 1,1);
         Group root = new Group (lineChart,grid);
 
-        scene = new Scene(root,595,350);
+        scene = new Scene(root,600,400);
 
         stage.setScene(scene);
         lineChart.prefHeightProperty ().bind (scene.heightProperty ());
