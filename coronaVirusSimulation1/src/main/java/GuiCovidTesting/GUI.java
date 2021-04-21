@@ -17,7 +17,7 @@ public class GUI {
       f.getContentPane().add(ap);
       f.pack();
       f.show();
-      Application.launch (ChartCovidTesting.class);
+      //Application.launch (ChartCovidTesting.class);
    }
      
    

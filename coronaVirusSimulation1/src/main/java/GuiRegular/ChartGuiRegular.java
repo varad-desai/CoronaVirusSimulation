@@ -74,7 +74,7 @@ public class ChartGuiRegular extends Application {
         //creating the chart
         areaChart = new AreaChart<String, Number>(xAxis,yAxis);
 
-        areaChart.setTitle("CoronaVirus Disease Spread and Control");
+        areaChart.setTitle("CoronaVirus Disease Spread with No Measures");
         //defining a series
         seriesInfected.setName("Infected");
         seriesImmune.setName("Immune");
