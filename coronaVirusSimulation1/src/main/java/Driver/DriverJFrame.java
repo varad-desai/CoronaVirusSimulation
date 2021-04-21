@@ -187,8 +187,7 @@ public class DriverJFrame extends javax.swing.JFrame {
                 }
             });
         }
-        String[] args = {""};
-        GuiLockDown.GUI.main(args);
+        GuiLockDown.GUI.demo();
 
     }//GEN-LAST:event_lockDownjButtonActionPerformed
 
@@ -208,8 +207,7 @@ public class DriverJFrame extends javax.swing.JFrame {
                 }
             });
         }
-        String[] args = {""};
-        GuiQuarantine.GUI.main(args);
+        GuiQuarantine.GUI.demo();
     }//GEN-LAST:event_quarantingJButtonActionPerformed
 
     private void testingJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testingJButtonActionPerformed
@@ -228,8 +226,7 @@ public class DriverJFrame extends javax.swing.JFrame {
                 }
             });
         }
-        String[] args = {""};
-        GuiCovidTesting.GUI.main(args);
+        GuiCovidTesting.GUI.demo();
 
     }//GEN-LAST:event_testingJButtonActionPerformed
 
@@ -249,8 +246,7 @@ public class DriverJFrame extends javax.swing.JFrame {
                 }
             });
         }
-        String[] args = {""};
-        GuiRegularWithMask.GUI.main(args);
+        GuiRegularWithMask.GUI.demo();
     }//GEN-LAST:event_maskJButtonActionPerformed
 
     private void vaccinationWithMaskJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaccinationWithMaskJButtonActionPerformed
@@ -270,8 +266,7 @@ public class DriverJFrame extends javax.swing.JFrame {
                 }
             });
         }
-        String[] args = {""};
-        GuiRegularVaccinationWithMask.GUI.main(args);
+        GuiRegularVaccinationWithMask.GUI.demo();
     }//GEN-LAST:event_vaccinationWithMaskJButtonActionPerformed
 
     private void socialDistanceJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_socialDistanceJButtonActionPerformed
@@ -291,8 +286,7 @@ public class DriverJFrame extends javax.swing.JFrame {
                 }
             });
         }
-        String[] args = {""};
-        GuiSocialDistance.GUI.main(args);
+        GuiSocialDistance.GUI.demo();
     }//GEN-LAST:event_socialDistanceJButtonActionPerformed
 
     private void socialDistanceWithQuarantineJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_socialDistanceWithQuarantineJButtonActionPerformed
@@ -312,8 +306,7 @@ public class DriverJFrame extends javax.swing.JFrame {
                 }
             });
         }
-        String[] args = {""};
-        GuiSocialDistanceWithQuarantine.GUI.main(args);
+        GuiSocialDistanceWithQuarantine.GUI.demo();
     }//GEN-LAST:event_socialDistanceWithQuarantineJButtonActionPerformed
 
     private void nothingJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nothingJButtonActionPerformed
@@ -334,8 +327,7 @@ public class DriverJFrame extends javax.swing.JFrame {
                 }
             });
         }
-        String[] args = {""};
-        GuiRegular.GUI.main(args);
+        GuiRegular.GUI.demo();
     }//GEN-LAST:event_nothingJButtonActionPerformed
 
     private void stopJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopJButton1ActionPerformed

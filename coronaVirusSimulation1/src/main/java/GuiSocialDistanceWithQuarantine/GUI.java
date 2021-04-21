@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javax.swing.*;
 
 public class GUI {
-    public static void main(String[] args) {
+    public static void demo() {
         int height = 600;
         int width = 800;
         JFrame f = new JFrame("corona");
