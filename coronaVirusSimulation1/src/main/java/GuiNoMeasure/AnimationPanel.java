@@ -82,14 +82,15 @@ public class AnimationPanel extends JPanel implements ActionListener {
       
       int no_of_susceptible = calculate_no_of_susceptible();
       int total_infected = population - no_of_susceptible;
+      int total_died = calculate_no_of_deaths();
       
       double calculated_r_factor = calculate_r_factor();
       System.out.println("R Factor: "+calculated_r_factor+
               " Total Infected: "+total_infected+
-              " Infected: "+calculate_no_of_infected()+
-              " Immune: "+calculate_no_of_immune()+
+              " Infected: "+(calculate_no_of_infected()-total_died)+
+              " Total Immune: "+calculate_no_of_immune()+
               " Susceptible: "+calculate_no_of_susceptible()+
-              " Deaths: "+calculate_no_of_deaths()+
+              " Deaths: "+total_died+
               " Population: "+population
               );
       chartGuiRegular.showChartRegular ( calculated_r_factor, calculate_no_of_infected(), calculate_no_of_immune(),
@@ -129,8 +130,10 @@ public class AnimationPanel extends JPanel implements ActionListener {
        for(int i=0; i<population; i++){
            if(p[i].immune) no_of_immune++;
        }
-       int deaths = calculate_no_of_deaths();
-       return no_of_immune - deaths;
+//       int deaths = calculate_no_of_deaths();
+       return no_of_immune 
+               //- deaths
+               ;
    }
    
    public int calculate_no_of_susceptible(){
