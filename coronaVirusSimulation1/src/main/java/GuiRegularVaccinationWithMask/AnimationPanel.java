@@ -94,14 +94,18 @@ public class AnimationPanel extends JPanel implements ActionListener {
         }
         handleCollisions(mask_wearing_begins);
       
-        double calculated_r_factor = calculate_r_factor();
-        System.out.println("R Factor: "+calculated_r_factor+
-            " Infected: "+no_of_infected+
-            " Immune: "+calculate_no_of_immune()+
-            " Susceptible: "+calculate_no_of_susceptible()+
-            " Deaths: "+calculate_no_of_deaths()+
-            " Population: "+population
-            );
+        int no_of_susceptible = calculate_no_of_susceptible();
+      int total_infected = population - no_of_susceptible;
+      
+      double calculated_r_factor = calculate_r_factor();
+      System.out.println("R Factor: "+calculated_r_factor+
+              " Total Infected: "+total_infected+
+              " Infected: "+calculate_no_of_infected()+
+              " Immune: "+calculate_no_of_immune()+
+              " Susceptible: "+calculate_no_of_susceptible()+
+              " Deaths: "+calculate_no_of_deaths()+
+              " Population: "+population
+              );
         chartVaccinationWithMask.showChartVaccinationWithMask (mask_wearing_begins, calculated_r_factor,
                 calculate_no_of_infected(), calculate_no_of_immune(),
                 calculate_no_of_susceptible(), calculate_no_of_vaccinated(),calculate_no_of_deaths(), p.length);
@@ -154,12 +158,19 @@ public class AnimationPanel extends JPanel implements ActionListener {
     }
    
     public int calculate_no_of_susceptible(){
-        int no_of_susceptible = 0;
-        for(int i=0; i<population; i++){
-            if(p[i].infected == 0) no_of_susceptible++;
-        }
-        return no_of_susceptible;
-    }
+       int no_of_susceptible = 0;
+       for(int i=0; i<population; i++){
+//           if(p[i].immune == false && p[i].infected == 0 && p[i].died == false) no _of_susceptible++;
+            if(!p[i].immune){
+                if(!p[i].died){
+                    if(p[i].infected == 0){
+                        no_of_susceptible++;
+                    }
+                }
+            }
+       }
+       return no_of_susceptible;
+   }
    
     public int calculate_no_of_deaths() {
         int no_of_deaths = 0;

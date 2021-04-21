@@ -97,12 +97,15 @@ public class AnimationPanel extends JPanel implements ActionListener {
       // check to see if any of the people are close enough to infect someone
       handleCollisions();
       
+      int no_of_susceptible = calculate_no_of_susceptible();
+      int total_infected = population - no_of_susceptible;
+      
       double calculated_r_factor = calculate_r_factor();
       System.out.println("R Factor: "+calculated_r_factor+
+              " Total Infected: "+total_infected+
               " Infected: "+calculate_no_of_infected()+
               " Immune: "+calculate_no_of_immune()+
               " Susceptible: "+calculate_no_of_susceptible()+
-              " Quarantine: "+calculate_no_of_quarantine ()+
               " Deaths: "+calculate_no_of_deaths()+
               " Population: "+population
               );
@@ -160,7 +163,14 @@ public class AnimationPanel extends JPanel implements ActionListener {
    public int calculate_no_of_susceptible(){
        int no_of_susceptible = 0;
        for(int i=0; i<population; i++){
-           if(p[i].infected == 0) no_of_susceptible++;
+//           if(p[i].immune == false && p[i].infected == 0 && p[i].died == false) no _of_susceptible++;
+            if(!p[i].immune){
+                if(!p[i].died){
+                    if(p[i].infected == 0){
+                        no_of_susceptible++;
+                    }
+                }
+            }
        }
        return no_of_susceptible;
    }
