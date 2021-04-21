@@ -53,7 +53,7 @@ public class DriverJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        nothingJButton.setText("Nothing");
+        nothingJButton.setText("No Measures");
         nothingJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nothingJButtonActionPerformed(evt);
