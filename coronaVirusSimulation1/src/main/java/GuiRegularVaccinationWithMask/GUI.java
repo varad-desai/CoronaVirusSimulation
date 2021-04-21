@@ -5,7 +5,6 @@
  */
 package GuiRegularVaccinationWithMask;
 import GuiRegularWithMask.*;
-import GuiRegular.*;
 import javafx.application.Application;
 
 import javax.swing.*;

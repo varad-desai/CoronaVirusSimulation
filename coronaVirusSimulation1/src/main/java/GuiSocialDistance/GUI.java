@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package GuiSocialDistance;
-import GuiRegular.*;
 import javafx.application.Application;
 
 import javax.swing.*;

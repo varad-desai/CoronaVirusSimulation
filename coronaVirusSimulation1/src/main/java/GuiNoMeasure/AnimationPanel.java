@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GuiRegular;
+package GuiNoMeasure;
 import Model.Person;
 import java.awt.*;
 import java.awt.event.*;
@@ -24,7 +24,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
     private int infect_distance = 10;// how close 2 people can be to get infected
     private int height = 600; // screen height
 	private int width = 800; // screen width
-    private ChartGuiRegular chartGuiRegular = new ChartGuiRegular();
+    private ChartGuiNoMeasure chartGuiRegular = new ChartGuiNoMeasure();
  
     private Random random = new Random();
     

@@ -8,7 +8,7 @@ package Driver;
 import GuiCovidTesting.ChartCovidTesting;
 import GuiLockDown.ChartLockDown;
 import GuiQuarantine.ChartGuiQuarantine;
-import GuiRegular.ChartGuiRegular;
+import GuiNoMeasure.ChartGuiNoMeasure;
 import GuiRegularVaccinationWithMask.ChartVaccinationWithMask;
 import GuiRegularWithMask.ChartRegularWithMask;
 import GuiSocialDistance.ChartSocialDistance;
@@ -314,12 +314,12 @@ public class DriverJFrame extends javax.swing.JFrame {
 
         if (!javaFxLaunched) { // First time
             Platform.setImplicitExit(false);
-            new Thread(()->Application.launch(ChartGuiRegular.class)).start();
+            new Thread(()->Application.launch(ChartGuiNoMeasure.class)).start();
             javaFxLaunched = true;
         } else { // Next times
             Platform.runLater(()->{
                 try {
-                    Application application = ChartGuiRegular.class.newInstance();
+                    Application application = ChartGuiNoMeasure.class.newInstance();
                     Stage primaryStage = new Stage ();
                     application.start(primaryStage);
                 } catch (Exception e) {
@@ -327,7 +327,7 @@ public class DriverJFrame extends javax.swing.JFrame {
                 }
             });
         }
-        GuiRegular.GUI.demo();
+        GuiNoMeasure.GUI.demo();
     }//GEN-LAST:event_nothingJButtonActionPerformed
 
     private void stopJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopJButton1ActionPerformed

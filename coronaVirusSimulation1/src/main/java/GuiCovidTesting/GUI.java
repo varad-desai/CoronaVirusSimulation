@@ -1,6 +1,5 @@
 package GuiCovidTesting;
 import GuiLockDown.ChartLockDown;
-import GuiRegular.*;
 import javafx.application.Application;
 
 import javax.swing.*;
