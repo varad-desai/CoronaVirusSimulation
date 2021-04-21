@@ -90,7 +90,7 @@ public class ChartGuiSocialDistanceWithQuarantine extends Application {
         grid.add(label, 0, 1);
         grid.add (text, 1,1);
         Group root = new Group (lineChart,grid);
-        scene = new Scene(root,595,350);
+        scene = new Scene(root,600,400);
 
         stage.setScene(scene);
         lineChart.prefHeightProperty ().bind (scene.heightProperty ());

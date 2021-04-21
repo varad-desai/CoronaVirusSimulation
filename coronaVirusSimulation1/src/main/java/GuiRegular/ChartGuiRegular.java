@@ -93,7 +93,7 @@ public class ChartGuiRegular extends Application {
         grid.add(label, 0, 1);
         grid.add (text, 1,1);
         Group root = new Group (areaChart,grid);
-        scene = new Scene(root,595,350);
+        scene = new Scene(root,600,400);
 
         stage.setScene(scene);
         areaChart.prefHeightProperty ().bind (scene.heightProperty ());
