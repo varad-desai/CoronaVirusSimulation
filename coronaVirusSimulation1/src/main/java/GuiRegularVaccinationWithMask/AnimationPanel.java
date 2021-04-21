@@ -154,8 +154,10 @@ public class AnimationPanel extends JPanel implements ActionListener {
         for(int i=0; i<population; i++){
             if(p[i].immune) no_of_immune++;
         }
-        int deaths = calculate_no_of_deaths();
-        return no_of_immune - deaths;
+//        int deaths = calculate_no_of_deaths();
+        return no_of_immune
+//                - deaths
+                ;
     }
    
     public int calculate_no_of_susceptible(){
