@@ -88,14 +88,18 @@ public class AnimationPanel extends JPanel implements ActionListener {
         // check to see if any of the people are close enough to infect someone
         handleCollisions();
       
-        double calculated_r_factor = calculate_r_factor();
-        System.out.println("R Factor: "+calculated_r_factor+
-            " Infected: "+calculate_no_of_infected()+
-            " Immune: "+calculate_no_of_immune()+
-            " Susceptible: "+calculate_no_of_susceptible()+
-            " Deaths: "+calculate_no_of_deaths()+
-            " Population: "+p.length
-            );
+        int no_of_susceptible = calculate_no_of_susceptible();
+      int total_infected = population - no_of_susceptible;
+      
+      double calculated_r_factor = calculate_r_factor();
+      System.out.println("R Factor: "+calculated_r_factor+
+              " Total Infected: "+total_infected+
+              " Infected: "+calculate_no_of_infected()+
+              " Immune: "+calculate_no_of_immune()+
+              " Susceptible: "+calculate_no_of_susceptible()+
+              " Deaths: "+calculate_no_of_deaths()+
+              " Population: "+population
+              );
         chartSocialDistance.showChartWithSocialDistance (calculated_r_factor, calculate_no_of_infected (),calculate_no_of_immune (),
                 calculate_no_of_susceptible (),calculate_no_of_deaths (),population);
         repaint();
@@ -138,8 +142,15 @@ public class AnimationPanel extends JPanel implements ActionListener {
    
    public int calculate_no_of_susceptible(){
        int no_of_susceptible = 0;
-       for(int i=0; i<p.length; i++){
-           if(p[i].infected == 0) no_of_susceptible++;
+       for(int i=0; i<population; i++){
+//           if(p[i].immune == false && p[i].infected == 0 && p[i].died == false) no _of_susceptible++;
+            if(!p[i].immune){
+                if(!p[i].died){
+                    if(p[i].infected == 0){
+                        no_of_susceptible++;
+                    }
+                }
+            }
        }
        return no_of_susceptible;
    }
