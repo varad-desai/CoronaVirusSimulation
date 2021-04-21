@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package GuiRegularWithMask;
-import GuiRegular.*;
 import GuiRegularVaccinationWithMask.ChartVaccinationWithMask;
 import javafx.application.Application;
 

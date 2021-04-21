@@ -1,4 +1,4 @@
-package GuiRegular;
+package GuiNoMeasure;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -25,7 +25,7 @@ import java.util.Date;
 /**
  * @author divya kulkarni
  */
-public class ChartGuiRegular extends Application {
+public class ChartGuiNoMeasure extends Application {
     public static int timeCounter = 0;
     private boolean maskIndicator = false;
     private final int WINDOW_SIZE = 10;

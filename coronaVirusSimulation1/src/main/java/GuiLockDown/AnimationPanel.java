@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package GuiLockDown;
-import GuiRegular.*;
 import Model.Person;
 import java.awt.*;
 import java.awt.event.*;

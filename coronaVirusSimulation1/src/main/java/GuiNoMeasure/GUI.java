@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GuiRegular;
+package GuiNoMeasure;
 import javafx.application.Application;
 
 import javax.swing.*;

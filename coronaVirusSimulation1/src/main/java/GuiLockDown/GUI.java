@@ -5,7 +5,6 @@
  */
 package GuiLockDown;
 import GuiQuarantine.ChartGuiQuarantine;
-import GuiRegular.*;
 import javafx.application.Application;
 
 import javax.swing.*;

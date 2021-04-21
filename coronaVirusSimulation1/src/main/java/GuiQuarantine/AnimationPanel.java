@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package GuiQuarantine;
-import GuiRegular.*;
 import Model.Person;
 import java.awt.*;
 import java.awt.event.*;
