@@ -90,7 +90,7 @@ public class AnimationPanel extends JPanel implements ActionListener {
                 move_to_quarantine(i);
             }
             if (!p[i].died && !p[i].quarantine) {
-    		p[i].moveWithSocialDistanceInRealWorld();
+    		p[i].moveWithSocialDistance();
             }
             if (!p[i].died && p[i].quarantine){
                 p[i].move_within_quarantine_boundaries();
