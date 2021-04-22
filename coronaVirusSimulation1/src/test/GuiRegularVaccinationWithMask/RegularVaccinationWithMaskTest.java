@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import GuiRegular.AnimationPanel;
+import GuiNoMeasure.AnimationPanel;
 import Model.Person;
 
 class RegularVaccinationWithMaskTest {
