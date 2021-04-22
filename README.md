@@ -3,15 +3,14 @@
 ## Team-5 Covid-19 Disease Simulation ##
 
 ### Team Members ###
-* Divya Kulkarni (001543678) 
-* Jaeline Granda (001257108) 
-* Varad Ratnakar Desai (001465732)
+    * Divya Kulkarni (001543678) 
+    * Jaeline Granda (001257108) 
+    * Varad Ratnakar Desai (001465732)
 
 
 ## Installation ##
  
  To run CoronaVirusSimulation on your machine:
- 
  
  ```
  https://github.com/varad-desai/CoronaVirusSimulation
