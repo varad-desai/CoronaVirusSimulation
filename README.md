@@ -13,7 +13,7 @@
  To run CoronaVirusSimulation on your machine:
  
  ```
- https://github.com/varad-desai/CoronaVirusSimulation
+ https://github.com/varad-desai/CoronaVirusSimulation_Info6205_Team5
  ```
  
   Install the dependencies:
