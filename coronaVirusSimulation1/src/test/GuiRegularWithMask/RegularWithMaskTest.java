@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import GuiCovidTesting.AnimationPanel;
+import GuiRegularWithMask.AnimationPanel;
 import Model.Person;
 
 class RegularWithMaskTest {
@@ -81,7 +81,7 @@ class RegularWithMaskTest {
 		
 		panel.setPopulation(2);
 		
-		panel.handleCollisions();
+		panel.handleCollisions(true);
 		
 		assertEquals(1, panel.calculate_no_of_infected());
 		assertEquals(0, panel.calculate_no_of_immune());
