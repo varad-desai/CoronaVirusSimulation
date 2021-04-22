@@ -228,20 +228,6 @@ public class Person {
 
     }
    
-      public void moveWithSocialDistanceInRealWorld() {
-       if(infected > 0){
-           // person is infected, so next person will be following at home quarantine
-           if (Math.random()<.1) {
-               move_in_real_world();
-           }
-       } else {
-           if (Math.random()<.5) {
-               move_in_real_world();
-           }
-       }
-
-    }
-   
        public void move_in_real_world() {
         if(can_move){
             x += vel_x;
